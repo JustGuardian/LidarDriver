@@ -47,10 +47,10 @@ Il progetto deve essere opportunamente strutturato in cartelle e sottocartelle a
 
     Rational:
     ├── include
-    │ └── rational.h
+    │   └── rational.h
     ├── README.txt
     └── src
-    ├── main.cpp
-    └── rational.cpp
+        ├── main.cpp
+        └── rational.cpp
 
 È inoltre obbligatorio allegare un file README in formato testo con la descrizione delle attività di ciascun membro del gruppo.
