@@ -2,13 +2,13 @@
 
 **La classe `LidarDriver` deve implementare:**
 
- - La funzione new_scan che accetta uno std::vector<double> contenente
+ - La funzione new_scan che accetta uno `std::vector<double>` contenente
    una scansione e lo memorizza nel buffer (sovrascrivendo la scansione
    meno recente se il buffer è pieno).  Questa funzione esegue anche il
    controllo di dimensione: se le letture sono in numero minore del
    previsto, completa i dati mancanti a 0;  se sono in numero maggiore,
    li taglia;
-   Numeri di elementi del std::vector<double> = x; 181 < x < 1810.
+   Numeri di elementi del `std::vector<double>` = x; 181 < x < 1810.
  - La funzione get_scan che fornisce in output uno std::vector<double>
    contenente la scansione più vecchia del sensore e la rimuove dal
    buffer;
@@ -19,7 +19,7 @@
    eliminata dal buffer, e se l’angolo richiesto non è disponibile
    ritorna la lettura relativa al valore di angolo più vicino;
    
- - L’overloading dell’operator<< che stampa a schermo l’ultima scansione
+ - L’overloading dell’`operator<<` che stampa a schermo l’ultima scansione
    salvata (ma non la rimuove dal buffer).
 
 **Note per l’implementazione:**
