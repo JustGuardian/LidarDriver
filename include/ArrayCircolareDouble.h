@@ -1,68 +1,51 @@
-#include <iostream>
+#ifndef CIRCULARARRAY_H
+#define CIRCULARARRAY_H
 
-class ArrayCircolareDouble{
-    public:
-    ArrayCircolareDouble(int);
-    void enqueue(double);
-    double dequeue();
-    private:
-    int BUFFER_DIM; //grandezza buffer
-    int dataSize = 0; //numero dati caricati nel vettore
-    double* array; //puntatore al vettore
-    int head, tail; //testa e coda del vettore, inizializzati a 0
-};
+#include "ArrayDati.h"
+#include <vector>
+#include <stdexcept> // Per std::out_of_range
 
-/*
-#ifndef ARRAYCIRCOLARE_H
-#define ARRAYCIRCOLARE_H
-
-#include <iostream>
-#include <stdexcept>
-
-class arrayCircolare {
+class CircularArray {
 private:
-    static const int SIZE = 5; // Dimensione fissa
-    int buffer[SIZE];
-    int head = 0;
-    int tail = 0;
-    bool is_full = false;
+    std::vector<ArrayDati*> buffer;     // Buffer circolare di puntatori
+    int BUFFER_DIM;                     // Dimensione massima del buffer
+    int head, tail;                     // Indice di testa e di coda
+    int dataSize;                       // Numero di elementi attualmente nel buffer
 
 public:
-    void enqueue(int value);
-    int dequeue();
-    void print() const;
+    // Costruttore: inizializza il buffer con la capacità specificata
+    explicit CircularArray(int size = 10) : buffer(size, nullptr), BUFFER_DIM(size), head(0), tail(0), dataSize(0) {}
+
+    // Distruttore: dealloca tutti gli oggetti ancora presenti nel buffer
+    ~CircularArray(){
+        for(auto ptr : buffer){
+            delete ptr;
+        }
+    }
+
+    // Metodo per inserire un oggetto nel buffer
+    void enque(ArrayDati*);
+
+    // Metodo per rimuovere l'oggetto più vecchio (FIFO)
+    ArrayDati* deque();
+
+    // Metodo per ottenere il numero di elementi nel buffer
+    int getSize() const;
+
+    // Metodo per controllare se il buffer è vuoto
+    bool isEmpty() const;
+
+    // Metodo per controllare se il buffer è pieno
+    bool isFull() const;
+
+    // Metodo per accedere agli elementi tramite indice relativo
+    ArrayDati* operator[](int indice) const;
+
+    // Metodo per stampare lo stato del buffer
+    void print(std::ostream& os = std::cout) const;
+
+    // Overloading dell'operatore di stampa <<
+    friend std::ostream& operator<<(std::ostream& os, const CircularArray& array);
 };
 
-#endif // ARRAYCIRCOLARE_H
-
-
-
-#include "arrayCircolare.h"
-
-void arrayCircolare::enqueue(int value) {
-    if (is_full) {
-        head = (head + 1) % SIZE; // Sovrascrive il dato più vecchio
-    }
-    buffer[tail] = value;
-    tail = (tail + 1) % SIZE;
-    is_full = (tail == head);
-}
-
-int arrayCircolare::dequeue() {
-    if (head == tail && !is_full) {
-        throw std::runtime_error("Buffer vuoto!");
-    }
-    int value = buffer[head];
-    head = (head + 1) % SIZE;
-    is_full = false;
-    return value;
-}
-
-void arrayCircolare::print() const {
-    int count = is_full ? SIZE : (tail + SIZE - head) % SIZE;
-    for (int i = 0; i < count; ++i) {
-        std::cout << buffer[(head + i) % SIZE] << " ";
-    }
-    std::cout << "\n";
-}
-*/
+#endif // CIRCULARARRAY_H
