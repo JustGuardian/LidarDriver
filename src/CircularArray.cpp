@@ -1,5 +1,4 @@
 #include "../include/CircularArray.h"
-// Test
 // Metodo per svuotare completamente il buffer
 void CircularArray::clear() {
     buffer.clear();  // Rimuove tutti gli elementi dal buffer
