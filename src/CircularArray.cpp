@@ -47,6 +47,7 @@ bool CircularArray::isFull() const { return dataSize == BUFFER_DIM; }
 
 // Operatore di confronto (uguaglianza)
 bool CircularArray::operator==(const CircularArray& other) {
+    // Confronta buffer_dim, head, tail, dataSize per evitare di confrontare subito tutti i dati
     if (BUFFER_DIM != other.BUFFER_DIM || head != other.head || tail != other.tail || dataSize != other.dataSize) {
         return false;
     }
