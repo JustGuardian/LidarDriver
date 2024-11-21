@@ -4,9 +4,9 @@
 #include "ArrayCircolareDouble.h"
 class LidarDriver{
 private:
-
+    ArrayCircolareDouble array;
 public:
-    void new_scan()
+
 };
 
 #endif LIDARDRIVER_H
