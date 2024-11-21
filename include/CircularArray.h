@@ -7,8 +7,8 @@
 
 class CircularArray {
 private:
-    std::vector<std::vector<double>> buffer;     // Buffer circolare di vettori di double
-    int BUFFER_DIM;                             // Dimensione massima del buffer
+    std::vector<std::vector<double>> buffer;    // Buffer circolare di vettori di double
+    const int BUFFER_DIM;                       // Dimensione massima del buffer
     int head, tail;                             // Indice di testa e di coda
     int dataSize;                               // Numero di elementi attualmente nel buffer
 
@@ -18,6 +18,9 @@ public:
 
     // Distruttore: non è necessario deallocare nulla poiché std::vector si occupa automaticamente della memoria
     ~CircularArray() = default;
+
+    // Metodo per svuotare completamente il buffer
+    void clear(); 
 
     // Metodo per inserire un vettore nel buffer
     void enque(const std::vector<double>& elemento);

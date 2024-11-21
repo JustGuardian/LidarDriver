@@ -1,5 +1,13 @@
 #include "../include/CircularArray.h"
 
+// Metodo per svuotare completamente il buffer
+void CircularArray::clear() {
+    buffer.clear();  // Rimuove tutti gli elementi dal buffer
+    head = 0;
+    tail = 0;
+    dataSize = 0;
+}
+
 // Metodo per inserire un vettore nel buffer
 void CircularArray::enque(const std::vector<double>& elemento) {
     if (isFull()) {
