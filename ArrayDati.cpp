@@ -18,11 +18,6 @@ void ArrayDati::pop() {
     }
 }
 
-// Metodo per ottenere il numero di elementi utilizzati (size)
-int ArrayDati::getSize() const {
-    return size;
-}
-
 // Metodo per accedere agli elementi (operatore [])
 double& ArrayDati::operator[](int index) {
     if (index >= 0 && index < size) {

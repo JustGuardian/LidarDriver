@@ -34,4 +34,4 @@ public:
     double getAngle() const;
 };
 
-#endif ARRAYDATI_H
+#endif // !ARRAYDATI_H
