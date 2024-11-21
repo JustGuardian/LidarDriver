@@ -17,14 +17,12 @@ public:
     explicit CircularArray(int size = 10) : buffer(size), BUFFER_DIM(size), head(0), tail(0), dataSize(0) {}
 
     // Costruttore di copia
-    CircularArray(const CircularArray &nuovoArray) 
-    : buffer(nuovoArray.buffer), BUFFER_DIM(nuovoArray.BUFFER_DIM), head(nuovoArray.head), tail(nuovoArray.tail), dataSize(nuovoArray.dataSize) {}
-    // Domanda, su ^ : è giusto? Teoricamente in questo modo crea un nuovo buffer partendo da quello 
-    // del nuovo vettore quindi viene chiamato un costruttore interno alla classe già scritta ecc
+    CircularArray(const CircularArray &vecchioArray) 
+    : buffer(vecchioArray.buffer), BUFFER_DIM(vecchioArray.BUFFER_DIM), head(vecchioArray.head), tail(vecchioArray.tail), dataSize(vecchioArray.dataSize) {}
 
     // Assegnamento di copia
     CircularArray& operator=(const CircularArray &newArray);
-
+    
     // Assegnamento di move
     CircularArray& operator=(CircularArray &&newArray);
     
