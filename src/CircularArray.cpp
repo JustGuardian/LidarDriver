@@ -102,4 +102,5 @@ void CircularArray::print(std::ostream& os) const {
 std::ostream& operator<<(std::ostream& os, const CircularArray& array) {
     array.print(os);
     return os;
+    //aggiunta commento
 }
