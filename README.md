@@ -1,6 +1,6 @@
 # Progetto laboratorio intermedio
 
-**La classe LidarDriver deve implementare:**
+**La classe `LidarDriver` deve implementare:**
 
  - La funzione new_scan che accetta uno std::vector<double> contenente
    una scansione e lo memorizza nel buffer (sovrascrivendo la scansione
@@ -24,7 +24,7 @@
 
 **Note per l’implementazione:**
 
- - La risoluzione del LidarDriver è fissa per tutta la durata di vita
+ - La risoluzione del `LidarDriver` è fissa per tutta la durata di vita
    del relativo oggetto (il che deve avere un riscontro nel
    costruttore).
  - Per la gestione del buffer interno alla classe è possibile utilizzare
