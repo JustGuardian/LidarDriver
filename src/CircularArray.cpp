@@ -5,6 +5,7 @@ void CircularArray::clear() {
     head = 0;
     tail = 0;
     dataSize = 0;
+    //aggiungo per test
 }
 
 // Metodo per inserire un vettore nel buffer
