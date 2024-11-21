@@ -8,7 +8,7 @@ void CircularArray::clear() {
 }
 
 // Definizione costruttore di default
-CircularArray::CircularArray(int size=10)
+CircularArray::CircularArray(int size)
 : buffer(size), BUFFER_DIM(size), head(0), tail(0), dataSize(0) {}
 
 // Definizione copy constructor
