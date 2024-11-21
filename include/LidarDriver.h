@@ -1,10 +1,11 @@
 #ifndef LIDARDRIVER_H
 #define LIDARDRIVER_H
 
-#include "ArrayCircolareDouble.h"
+#include "CircularArray.h"
+
 class LidarDriver{
 private:
-    ArrayCircolareDouble array;
+    CircularArray array;
 public:
 
 };

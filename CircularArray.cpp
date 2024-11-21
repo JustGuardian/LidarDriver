@@ -1,4 +1,4 @@
-#include "include/ArrayCircolareDouble.h"
+#include "include/CircularArray.h"
 
 // Metodo per inserire un oggetto nel buffer
 void CircularArray::enque(ArrayDati* elemento) {
