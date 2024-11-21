@@ -26,6 +26,8 @@ public:
 
 #include "arrayCircolare.h"
 
+//test
+
 arrayCircolare::arrayCircolare(int dimensione)
     : size(dimensione), buffer(new int[dimensione]) {}
 
