@@ -23,10 +23,10 @@ public:
     // del nuovo vettore quindi viene chiamato un costruttore interno alla classe già scritta ecc
 
     // Assegnamento di copia
-    CircularArray& operator=(const CircularArray &nuovoArray);
+    CircularArray& operator=(const CircularArray &newArray);
 
     // Assegnamento di move
-    CircularArray& operator=(CircularArray &&nuovoArray);
+    CircularArray& operator=(CircularArray &&newArray);
     
     // Distruttore: non è necessario deallocare nulla poiché std::vector si occupa automaticamente della memoria
     ~CircularArray() = default;
