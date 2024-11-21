@@ -2,68 +2,44 @@
 #define CIRCULARARRAY_H
 
 #include <vector>
-#include <stdexcept> // Per std::out_of_range
 #include <iostream>
+#include <stdexcept>
 
 class CircularArray {
 private:
-    std::vector<std::vector<double>> buffer;    // Buffer circolare di vettori di double
-    const int BUFFER_DIM;                       // Dimensione massima del buffer
-    int head, tail;                             // Indice di testa e di coda
-    int dataSize;                               // Numero di elementi attualmente nel buffer
+    std::vector<std::vector<double>> buffer;  // Buffer contenente i vettori
+    const int BUFFER_DIM;  // Capacità massima del buffer
+    int head;  // Indice dell'elemento più vecchio
+    int tail;  // Indice dell'elemento più recente
+    int dataSize;  // Numero di elementi nel buffer
+
+    int incrementIndex(int index) const;  // Metodo per incrementare l'indice (circular)
 
 public:
-    // Costruttore: inizializza il buffer con la capacità specificata
-    explicit CircularArray(int size = 10);
-
-    // Costruttore di copia
-    CircularArray(const CircularArray &vecchioArray);
-
-    // Costruttore di move
-    CircularArray(CircularArray &&vecchioArray);    
-
-    // Assegnamento di copia
-    CircularArray& operator=(const CircularArray &vecchioArray);
+    // Costruttori
+    CircularArray(int size);  // Costruttore con dimensione
+    CircularArray(const CircularArray &vecchioArray);  // Copy constructor
+    CircularArray(CircularArray &&vecchioArray);  // Move constructor
     
-    // Assegnamento di move
-    CircularArray& operator=(CircularArray &&vecchioArray);
-    
-    // Distruttore: non è necessario deallocare nulla poiché std::vector si occupa automaticamente della memoria
-    ~CircularArray() = default;
+    // Metodi
+    void clear();  // Svuota il buffer
+    void enqueue(const std::vector<double>& elemento);  // Aggiungi elemento al buffer
+    void enqueue(std::vector<double>&& elemento);  // Aggiungi elemento al buffer (move)
+    std::vector<double> dequeue();  // Rimuove e ritorna l'elemento più vecchio
+    int getSize() const;  // Ottiene la dimensione del buffer
+    bool isEmpty() const;  // Verifica se il buffer è vuoto
+    bool isFull() const;  // Verifica se il buffer è pieno
+    int capacity() const;  // Ritorna la capacità del buffer
 
-    // Metodo per svuotare completamente il buffer
-    void clear(); 
+    // Operatori
+    bool operator==(const CircularArray& other) const;  // Confronta due CircularArray per uguaglianza
+    bool operator!=(const CircularArray& other) const;  // Confronta due CircularArray per disuguaglianza
+    std::vector<double>& operator[](int indice);  // Accesso con indice relativo
+    const std::vector<double>& operator[](int indice) const;  // Accesso con indice relativo (const)
 
-    // Metodo per inserire un vettore nel buffer
-    void enqueue(const std::vector<double>& elemento);
-
-    // Metodo per rimuovere il vettore più vecchio (FIFO)
-    std::vector<double> dequeue();
-
-    // Metodo per ottenere il numero di elementi nel buffer
-    int getSize() const;
-
-    // Metodo per controllare se il buffer è vuoto
-    bool isEmpty() const;
-
-    // Metodo per controllare se il buffer è pieno
-    bool isFull() const;
-
-    // Operatore di confronto per uguaglianza
-    bool operator==(const CircularArray& other);
-
-    // Operatore di confronto per disuguaglianza
-    bool operator!=(const CircularArray& other);
-
-    // Metodo per accedere agli elementi tramite indice relativo
-    std::vector<double>& operator[](int indice);
-    const std::vector<double>& operator[](int indice) const;
-
-    // Metodo per stampare lo stato del buffer
-    void print(std::ostream& os = std::cout) const;
-
-    // Overloading dell'operatore di stampa <<
-    friend std::ostream& operator<<(std::ostream& os, const CircularArray& array);
+    // Stampa
+    void print(std::ostream& os) const;  // Stampa lo stato del buffer
+    friend std::ostream& operator<<(std::ostream& os, const CircularArray& array);  // Operatore di stampa
 };
 
 #endif // CIRCULARARRAY_H
