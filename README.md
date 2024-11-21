@@ -9,11 +9,11 @@
    previsto, completa i dati mancanti a 0;  se sono in numero maggiore,
    li taglia;
    Numeri di elementi del `std::vector<double>` = x; 181 < x < 1810.
- - La funzione get_scan che fornisce in output uno std::vector<double>
+ - La funzione `get_scan` che fornisce in output uno std::vector<double>
    contenente la scansione più vecchia del sensore e la rimuove dal
    buffer;
- - La funzione clear_buffer che elimina (senza restituirle) tutte le
- - La funzione get_distance che accetta un angolo espresso in gradi
+ - La funzione `clear_buffer` che elimina (senza restituirle) tutte le
+ - La funzione `get_distance` che accetta un angolo espresso in gradi
    (double) e ritorna la lettura corrispondente a tale angolo nella
    scansione più recente acquisita dal sensore;  tale scansione non è
    eliminata dal buffer, e se l’angolo richiesto non è disponibile
