@@ -1,12 +1,8 @@
 #include "../include/CircularArray.h"
 // Metodo per svuotare completamente il buffer
 void CircularArray::clear() {
-    for (auto& elem : buffer) {
-        elem.clear();
-    }
-    head = 0;
-    tail = 0;
-    dataSize = 0;
+    std::for_each(buffer.begin(), buffer.end(), [](auto& v) { v.resize(0); });
+    head = tail = dataSize = 0;
 }
 
 // Definizione costruttore di default
@@ -73,27 +69,26 @@ bool CircularArray::isEmpty() const { return dataSize == 0; }
 bool CircularArray::isFull() const { return dataSize == BUFFER_DIM; }
 
 //restituisce dimensione del buffer
-int CircularArray::capacity() const {
-    return BUFFER_DIM;
-}
+int CircularArray::capacity() const { return BUFFER_DIM; }
 
 // Operatore di confronto (uguaglianza)
-bool CircularArray::operator==(const CircularArray& other) {
-    if (BUFFER_DIM != other.BUFFER_DIM || head != other.head || tail != other.tail || dataSize != other.dataSize) {
+bool CircularArray::operator==(const CircularArray& other) const {
+    // Confronta dimensione del buffer e numero di elementi
+    if (BUFFER_DIM != other.BUFFER_DIM || dataSize != other.dataSize) {
         return false;
     }
-
-    // Confronta il contenuto del buffer
-    for (int i = 0; i < BUFFER_DIM; ++i) {
-        if (buffer[i] != other.buffer[i]) {
+    // Confronta il contenuto del buffer in base alla posizione logica degli elementi
+    for (int i = 0; i < dataSize; ++i) {
+        if ((*this)[i] != other[i]) {
             return false;
         }
     }
     return true;
 }
 
+
 // Operatore di confronto (disuguaglianza)
-bool CircularArray::operator!=(const CircularArray& other) {
+bool CircularArray::operator!=(const CircularArray& other) const {
     return !(*this == other);
 }
 
