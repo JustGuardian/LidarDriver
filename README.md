@@ -32,7 +32,7 @@ scelta;
 
 La classe LidarDriver (e altre eventuali classi) devono essere correttamente separate nei file .h e .cpp. Un ulteriore file .cpp deve contenere il main, usato per i test. 
 Il progetto deve essere opportunamente strutturato in cartelle e sottocartelle analogamente a quanto illustrato nello schema seguente (relativo al progetto Rational):
-'''
+
 Rational:
 ├── include
 │ └── rational.h
@@ -40,5 +40,5 @@ Rational:
 └── src
 ├── main.cpp
 └── rational.cpp
-'''
+
 È inoltre obbligatorio allegare un file README in formato testo con la descrizione delle attività di ciascun membro del gruppo.
