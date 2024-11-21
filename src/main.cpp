@@ -1,38 +1,68 @@
-#include "../include/CircularArray.h"
 #include <iostream>
+#include <vector>
+#include "../include/CircularArray.h"
 
 int main() {
-    try {
-        int y;
-        std::cout << "Premi un tasto per iniziare: ";
-        std::cin >> y;
+    // Creazione di un CircularArray con dimensione 3
+    CircularArray buffer(3);
 
-        std::cout << "Inizio controllo" << std::endl;
+    // Creazione di alcuni vettori di test
+    std::vector<double> vec1 = {1.1, 2.2, 3.3};
+    std::vector<double> vec2 = {4.4, 5.5, 6.6};
+    std::vector<double> vec3 = {7.7, 8.8, 9.9};
+    std::vector<double> vec4 = {10.10, 11.11, 12.12};
 
-        // Crea un oggetto ArrayDati con 182 elementi
-        ArrayDati array1(182);
-        for (int i = 0; i < 181; i++) {
-            array1.push(i);
-        }
+    // Inserimento di vettori nel buffer
+    std::cout << "Enqueuing vec1:" << std::endl;
+    buffer.enque(vec1);
+    std::cout << buffer << std::endl;
 
-        std::cout << "Meta' controllo" << std::endl;
+    std::cout << "Enqueuing vec2:" << std::endl;
+    buffer.enque(vec2);
+    std::cout << buffer << std::endl;
 
-        // Crea un buffer circolare di dimensione 3
-        CircularArray array4(3);
+    std::cout << "Enqueuing vec3:" << std::endl;
+    buffer.enque(vec3);
+    std::cout << buffer << std::endl;
 
-        // Inserisci nuovi oggetti dinamici nel buffer circolare
-        for (long long i = 0; i < 1000000000; i++) {
-            array4.enque(new ArrayDati(array1));
-        }
+    // Prova di sovrascrivere un elemento (perché il buffer è pieno)
+    std::cout << "Enqueuing vec4 (overflow, dovrebbe rimuovere vec1):" << std::endl;
+    buffer.enque(vec4);
+    std::cout << buffer << std::endl;
 
-        std::cout << "Fine controllo" << std::endl;
+    // Rimozione di un elemento (FIFO)
+    std::cout << "Dequeuing an element:" << std::endl;
+    std::vector<double> dequeued = buffer.deque();
+    std::cout << "Dequeued vector: ";
+    for (double val : dequeued) {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
+    std::cout << buffer << std::endl;
 
-        int x;
-        std::cout << "Premi un tasto per terminare: ";
-        std::cin >> x;
-    } catch (const std::exception& e) {
-        std::cerr << "Errore: " << e.what() << std::endl;
+    // Accedere a un elemento tramite l'operatore []
+    std::cout << "Accessing an element by index (index 0):" << std::endl;
+    std::vector<double>& accessedVec = buffer[0];
+    std::cout << "Accessed vector: ";
+    for (double val : accessedVec) {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
+
+    // Confronto tra due CircularArray
+    CircularArray anotherBuffer(3);
+    anotherBuffer.enque(vec2);
+    anotherBuffer.enque(vec3);
+    anotherBuffer.enque(vec4);
+
+    if (buffer == anotherBuffer) {
+        std::cout << "The buffers are equal." << std::endl;
+    } else {
+        std::cout << "The buffers are not equal." << std::endl;
     }
 
+
+    int y;
+    std::cin >> y;
     return 0;
 }
