@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <stdexcept> // Per std::out_of_range
 
 class ArrayDati {
 private:
@@ -19,19 +20,20 @@ public:
     // Metodo per rimuovere l'ultimo elemento (pop)
     void pop();
 
-    // Metodo per ottenere il numero di elementi utilizzati (size)
-    int getSize() const;
-
     // Metodo per accedere agli elementi (operatore [])
     double& operator[](int indice);
 
     // Metodo per stampare gli elementi utilizzati
-    void print() const;
+    void print(std::ostream& os = std::cout) const;
 
-    // Metodo per ottenere la capacità del vettore (dimensione totale allocata)
+    // Metodo per ottenere il numero di elementi utilizzati (size)
     int getSize() const;
 
+    //Metodo per ottenere l'angolo tra le misurazioni
     double getAngle() const;
+
+    // Overloading dell'operatore di stampa <<
+    friend std::ostream& operator<<(std::ostream& os, const ArrayDati& array);
 };
 
 #endif // !ARRAYDATI_H

@@ -28,18 +28,27 @@ double& ArrayDati::operator[](int index) {
 }
 
 // Metodo per stampare gli elementi utilizzati
-void ArrayDati::print() const {
+void ArrayDati::print(std::ostream& os) const {
+    os << "[";
     for (int i = 0; i < size; ++i) {
-        std::cout << dati[i] << " ";
+        os << dati[i];
+        if (i < size - 1) {
+            os << ", ";
+        }
     }
-    std::cout << std::endl;
+    os << "]";
 }
 
 // Metodo per ottenere la capacità del vettore (dimensione totale allocata)
 int ArrayDati::getSize() const {
-    return dati.size();
+    return size;
 }
 
 double ArrayDati::getAngle() const{
-    return 181/size;
+    return 181.0/size;
+}
+
+std::ostream& operator<<(std::ostream& os, const ArrayDati& array) {
+    array.print(os);
+    return os;
 }
