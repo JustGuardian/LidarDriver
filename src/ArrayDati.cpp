@@ -1,4 +1,4 @@
-#include "include/ArrayDati.h"
+#include "../include/ArrayDati.h"
 
 void ArrayDati::push(double valore) {
     if (size < dati.size()) {
