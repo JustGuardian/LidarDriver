@@ -26,6 +26,9 @@ public:
     //Operatore di confronto
     bool operator==(const ArrayDati& other);
 
+    //Operatore di confronto
+    bool operator!=(const ArrayDati& other);
+
     // Metodo per scrviere gli elementi (operatore [])
     double& operator[](int indice);
 

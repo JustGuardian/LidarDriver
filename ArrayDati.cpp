@@ -28,17 +28,30 @@ ArrayDati& ArrayDati::operator=(const ArrayDati& other) {
 }
 
 //Operatore di confronto
-    bool ArrayDati::operator==(const ArrayDati& other){
-        if (this == &other)
-            return true;
-        if (this->getSize() != other.getSize())
-            return false;
-        for (int i = 0; i<this->getSize(); i++) {
-            if ((*this)[i] != other[i])
-                return false;
-        } 
+bool ArrayDati::operator==(const ArrayDati& other){
+    if (this == &other)
         return true;
-    }
+    if (this->getSize() != other.getSize())
+        return false;
+    for (int i = 0; i<this->getSize(); i++) {
+        if ((*this)[i] != other[i])
+            return false;
+    } 
+    return true;
+}
+
+//Operatore di confronto
+bool ArrayDati::operator!=(const ArrayDati& other){
+    if (this == &other)
+        return false;
+    if (this->getSize() != other.getSize())
+        return true;
+    for (int i = 0; i<this->getSize(); i++) {
+        if ((*this)[i] != other[i])
+            return true;
+    } 
+    return false;
+}
 
 
 // Metodo per accedere agli elementi (operatore [])

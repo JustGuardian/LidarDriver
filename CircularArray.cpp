@@ -39,7 +39,7 @@ bool CircularArray::isEmpty() const { return dataSize == 0; }
 // Metodo per controllare se il buffer è pieno
 bool CircularArray::isFull() const { return dataSize == BUFFER_DIM; }
 
-//Operatore di assegnazione
+//Operatore di confronto
 bool CircularArray::operator==(const CircularArray& other){
     if (BUFFER_DIM != other.BUFFER_DIM || head != other.head || tail != other.tail || dataSize != other.dataSize) {
         return false;
@@ -54,6 +54,23 @@ bool CircularArray::operator==(const CircularArray& other){
         }
     }
     return true;
+}
+
+//Operatore di confronto
+bool CircularArray::operator!=(const CircularArray& other){
+    if (BUFFER_DIM != other.BUFFER_DIM || head != other.head || tail != other.tail || dataSize != other.dataSize) {
+        return true;
+    }
+
+    // Confronta il contenuto del buffer
+    for (int i = 0; i < BUFFER_DIM; ++i) {
+        if ((buffer[i] == nullptr && other.buffer[i] != nullptr) ||
+            (buffer[i] != nullptr && other.buffer[i] == nullptr) ||
+            (buffer[i] != nullptr && other.buffer[i] != nullptr && buffer[i] != other.buffer[i])) {
+            return true;
+        }
+    }
+    return false;
 }
 
 // Metodo per accedere agli elementi tramite indice relativo
