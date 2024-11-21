@@ -20,21 +20,16 @@ CircularArray::CircularArray(CircularArray &&vecchioArray)
 : buffer(vecchioArray.buffer), BUFFER_DIM(vecchioArray.BUFFER_DIM), head(vecchioArray.head), tail(vecchioArray.tail), dataSize(vecchioArray.dataSize) 
 {
     vecchioArray.head = vecchioArray.tail = vecchioArray.dataSize = 0;
-    vecchioArray.buffer.clear();
+}
 }
 
 // Copy assignment
 CircularArray& CircularArray::operator=(const CircularArray &vecchioArray){
     if (this != &vecchioArray) {  // Controllo per evitare auto-assegnamento
         // Dealloco il vettore buffer
-        buffer.clear();
-        
-        // Copia le dimensioni e lo stato
         head = vecchioArray.head;
         tail = vecchioArray.tail;
         dataSize = vecchioArray.dataSize;
-        
-        // Copia il buffer (crea una nuova copia)
         buffer = vecchioArray.buffer;
     }
     return *this;
