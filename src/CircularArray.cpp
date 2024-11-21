@@ -7,6 +7,60 @@ void CircularArray::clear() {
     dataSize = 0;
 }
 
+// Definizione costruttore di default
+CircularArray::CircularArray(int size=0)
+: buffer(size), BUFFER_DIM(size), head(0), tail(0), dataSize(0) {}
+
+// Definizione copy constructor
+CircularArray::CircularArray(const CircularArray &vecchioArray)
+: buffer(vecchioArray.buffer), BUFFER_DIM(vecchioArray.BUFFER_DIM), head(vecchioArray.head), tail(vecchioArray.tail), dataSize(vecchioArray.dataSize) {}
+
+// Definizione move constructor
+CircularArray::CircularArray(CircularArray &&vecchioArray)
+: buffer(vecchioArray.buffer), BUFFER_DIM(vecchioArray.BUFFER_DIM), head(vecchioArray.head), tail(vecchioArray.tail), dataSize(vecchioArray.dataSize) 
+{
+    vecchioArray.head = vecchioArray.tail = vecchioArray.dataSize = 0;
+    vecchioArray.buffer.clear();
+}
+
+// Copy assignment
+CircularArray& CircularArray::operator=(const CircularArray &vecchioArray){
+    if (this != &vecchioArray) {  // Controllo per evitare auto-assegnamento
+        // Dealloco il vettore buffer
+        buffer.clear();
+        
+        // Copia le dimensioni e lo stato
+        head = vecchioArray.head;
+        tail = vecchioArray.tail;
+        dataSize = vecchioArray.dataSize;
+        
+        // Copia il buffer (crea una nuova copia)
+        buffer = vecchioArray.buffer;
+    }
+    return *this;
+}
+
+// Move assignment
+CircularArray& CircularArray::operator=(CircularArray &&vecchioArray){
+    if (this != &vecchioArray) {  // Controllo per evitare auto-assegnamento
+        // Dealloco il vettore buffer
+        buffer.clear();
+        
+        // Trasferisco le dimensioni e lo stato
+        head = vecchioArray.head;
+        tail = vecchioArray.tail;
+        dataSize = vecchioArray.dataSize;
+        
+        // "Sposta" il buffer (prende il buffer di vecchioArray)
+        buffer = std::move(vecchioArray.buffer);
+        
+        // Pulisco vecchioArray
+        vecchioArray.head = vecchioArray.tail = vecchioArray.dataSize = 0;
+        vecchioArray.buffer.clear();
+    }
+    return *this;
+}
+
 // Metodo per inserire un vettore nel buffer
 void CircularArray::enqueue(const std::vector<double>& elemento) {
     if (isFull()) {
