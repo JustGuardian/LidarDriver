@@ -20,8 +20,17 @@ public:
     // Metodo per rimuovere l'ultimo elemento (pop)
     void pop();
 
-    // Metodo per accedere agli elementi (operatore [])
+    //Operatore di assegnazione
+    ArrayDati& operator=(const ArrayDati& other);
+
+    //Operatore di confronto
+    bool operator==(const ArrayDati& other);
+
+    // Metodo per scrviere gli elementi (operatore [])
     double& operator[](int indice);
+
+    // Metodo per leggere gli elementi (operatore [])
+    double operator[](int index) const;
 
     // Metodo per stampare gli elementi utilizzati
     void print(std::ostream& os = std::cout) const;

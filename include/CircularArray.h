@@ -38,6 +38,9 @@ public:
     // Metodo per controllare se il buffer è pieno
     bool isFull() const;
 
+    //Operatore di assegnazione
+    bool operator==(const CircularArray& other);
+
     // Metodo per accedere agli elementi tramite indice relativo
     ArrayDati* operator[](int indice) const;
 

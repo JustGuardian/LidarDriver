@@ -18,8 +18,39 @@ void ArrayDati::pop() {
     }
 }
 
+//Operatore di assegnazione
+ArrayDati& ArrayDati::operator=(const ArrayDati& other) {
+    if (this != &other) { // Evita auto-assegnazione
+        dati = other.dati; 
+        size = other.size; 
+    }
+    return *this; 
+}
+
+//Operatore di confronto
+    bool ArrayDati::operator==(const ArrayDati& other){
+        if (this == &other)
+            return true;
+        if (this->getSize() != other.getSize())
+            return false;
+        for (int i = 0; i<this->getSize(); i++) {
+            if ((*this)[i] != other[i])
+                return false;
+        } 
+        return true;
+    }
+
+
 // Metodo per accedere agli elementi (operatore [])
 double& ArrayDati::operator[](int index) {
+    if (index >= 0 && index < size) {
+        return dati[index];
+    } else {
+        throw std::out_of_range("Indice fuori dai limiti!");
+    }
+}
+
+double ArrayDati::operator[](int index) const {
     if (index >= 0 && index < size) {
         return dati[index];
     } else {
