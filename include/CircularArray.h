@@ -23,10 +23,10 @@ public:
     void clear(); 
 
     // Metodo per inserire un vettore nel buffer
-    void enque(const std::vector<double>& elemento);
+    void enqueue(const std::vector<double>& elemento);
 
     // Metodo per rimuovere il vettore più vecchio (FIFO)
-    std::vector<double> deque();
+    std::vector<double> dequeue();
 
     // Metodo per ottenere il numero di elementi nel buffer
     int getSize() const;
