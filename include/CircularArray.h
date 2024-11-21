@@ -17,7 +17,7 @@ private:
 
 public:
     // Costruttori
-    CircularArray(int size);  // Costruttore con dimensione
+    CircularArray(int size = 10);  // Costruttore con dimensione
     CircularArray(const CircularArray &vecchioArray);  // Copy constructor
     CircularArray(CircularArray &&vecchioArray);  // Move constructor
     
