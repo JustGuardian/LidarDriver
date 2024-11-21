@@ -29,7 +29,7 @@ public:
     CircularArray& operator=(CircularArray &&newArray);
     
     // Distruttore: non è necessario deallocare nulla poiché std::vector si occupa automaticamente della memoria
-    ~CircularArray();
+    ~CircularArray() = default;
 
     // Metodo per svuotare completamente il buffer
     void clear(); 
