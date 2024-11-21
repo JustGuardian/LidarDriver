@@ -14,25 +14,25 @@ int main() {
 
     // Inserimento di vettori nel buffer
     std::cout << "Enqueuing vec1:" << std::endl;
-    buffer.enque(vec1);
+    buffer.enqueue(vec1);
     std::cout << buffer << std::endl;
 
     std::cout << "Enqueuing vec2:" << std::endl;
-    buffer.enque(vec2);
+    buffer.enqueue(vec2);
     std::cout << buffer << std::endl;
 
     std::cout << "Enqueuing vec3:" << std::endl;
-    buffer.enque(vec3);
+    buffer.enqueue(vec3);
     std::cout << buffer << std::endl;
 
     // Prova di sovrascrivere un elemento (perché il buffer è pieno)
     std::cout << "Enqueuing vec4 (overflow, dovrebbe rimuovere vec1):" << std::endl;
-    buffer.enque(vec4);
+    buffer.enqueue(vec4);
     std::cout << buffer << std::endl;
 
     // Rimozione di un elemento (FIFO)
     std::cout << "Dequeuing an element:" << std::endl;
-    std::vector<double> dequeued = buffer.deque();
+    std::vector<double> dequeued = buffer.dequeue();
     std::cout << "Dequeued vector: ";
     for (double val : dequeued) {
         std::cout << val << " ";
@@ -51,17 +51,16 @@ int main() {
 
     // Confronto tra due CircularArray
     CircularArray anotherBuffer(3);
-    anotherBuffer.enque(vec2);
-    anotherBuffer.enque(vec3);
-    anotherBuffer.enque(vec4);
+    anotherBuffer.enqueue(vec2);
+    anotherBuffer.enqueue(vec3);
+    anotherBuffer.enqueue(vec4);
 
     if (buffer == anotherBuffer) {
         std::cout << "The buffers are equal." << std::endl;
     } else {
         std::cout << "The buffers are not equal." << std::endl;
     }
-
-
+    
     int y;
     std::cin >> y;
     return 0;

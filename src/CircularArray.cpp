@@ -9,7 +9,7 @@ void CircularArray::clear() {
 }
 
 // Metodo per inserire un vettore nel buffer
-void CircularArray::enque(const std::vector<double>& elemento) {
+void CircularArray::enqueue(const std::vector<double>& elemento) {
     if (isFull()) {
         // Dealloca il più vecchio elemento
         buffer[head].clear();  // Svuota il vettore
@@ -24,7 +24,7 @@ void CircularArray::enque(const std::vector<double>& elemento) {
 }
 
 // Metodo per rimuovere il vettore più vecchio (FIFO)
-std::vector<double> CircularArray::deque() {
+std::vector<double> CircularArray::dequeue() {
     if (isEmpty()) {
         throw std::underflow_error("Buffer vuoto.");
     }
