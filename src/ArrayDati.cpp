@@ -53,8 +53,7 @@ bool ArrayDati::operator!=(const ArrayDati& other){
     return false;
 }
 
-
-// Metodo per accedere agli elementi (operatore [])
+// Metodo per scrivere gli elementi (operatore [])
 double& ArrayDati::operator[](int index) {
     if (index >= 0 && index < size) {
         return dati[index];
@@ -63,6 +62,7 @@ double& ArrayDati::operator[](int index) {
     }
 }
 
+// Metodo per leggere gli elementi (operatore [])
 double ArrayDati::operator[](int index) const {
     if (index >= 0 && index < size) {
         return dati[index];
