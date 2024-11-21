@@ -13,6 +13,30 @@ class ArrayCircolareDouble{
 };
 
 /*
+#ifndef ARRAYCIRCOLARE_H
+#define ARRAYCIRCOLARE_H
+
+#include <iostream>
+#include <stdexcept>
+
+class arrayCircolare {
+private:
+    static const int SIZE = 5; // Dimensione fissa
+    int buffer[SIZE];
+    int head = 0;
+    int tail = 0;
+    bool is_full = false;
+
+public:
+    void enqueue(int value);
+    int dequeue();
+    void print() const;
+};
+
+#endif // ARRAYCIRCOLARE_H
+
+
+
 #include "arrayCircolare.h"
 
 void arrayCircolare::enqueue(int value) {
