@@ -17,7 +17,7 @@ public:
     explicit CircularArray(int size = 10) : buffer(size), BUFFER_DIM(size), head(0), tail(0), dataSize(0) {}
 
     // Distruttore: non è necessario deallocare nulla poiché std::vector si occupa automaticamente della memoria
-    ~CircularArray() = default;
+    ~CircularArray();
 
     // Metodo per svuotare completamente il buffer
     void clear(); 
