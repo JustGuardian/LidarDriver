@@ -21,12 +21,6 @@ public:
 
     // Costruttore di move
     CircularArray(CircularArray &&vecchioArray);    
-
-    // Assegnamento di copia
-    CircularArray& operator=(const CircularArray &vecchioArray);
-    
-    // Assegnamento di move
-    CircularArray& operator=(CircularArray &&vecchioArray);
     
     // Distruttore: non è necessario deallocare nulla poiché std::vector si occupa automaticamente della memoria
     ~CircularArray() = default;
