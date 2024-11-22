@@ -3,10 +3,9 @@
 #include <stdexcept>
 #include <algorithm>
 
-// Metodo per svuotare completamente il buffer
-void CircularArray::clear() {
-    std::for_each(buffer.begin(), buffer.end(), [](auto& v) { v.clear(); });
-    head = tail = dataSize = 0;
+// Metodo incremento indice
+int CircularArray::incrementIndex(int index) const {
+    return (index + 1) % BUFFER_DIM;
 }
 
 // Definizione costruttore di default
@@ -35,9 +34,10 @@ CircularArray::CircularArray(CircularArray &&vecchioArray)
     vecchioArray.head = vecchioArray.tail = vecchioArray.dataSize = 0;
 }
 
-// Metodo incremento indice
-int CircularArray::incrementIndex(int index) const {
-    return (index + 1) % BUFFER_DIM;
+// Metodo per svuotare completamente il buffer
+void CircularArray::clear() {
+    std::for_each(buffer.begin(), buffer.end(), [](auto& v) { v.clear(); });
+    head = tail = dataSize = 0;
 }
 
 // Metodo per inserire un vettore nel buffer
