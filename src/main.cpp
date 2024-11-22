@@ -1,66 +1,53 @@
+#include "../include/LidarDriver.h"
 #include <iostream>
 #include <vector>
-#include "../include/CircularArray.h"
 
 int main() {
-    // Creazione di un CircularArray con dimensione 3
-    CircularArray buffer(3);
+    // Creazione di un oggetto LidarDriver con buffer di dimensione 5
+    LidarDriver lidar(5);
 
-    // Creazione di alcuni vettori di test
-    std::vector<double> vec1 = {1.1, 2.2, 3.3};
-    std::vector<double> vec2 = {4.4, 5.5, 6.6};
-    std::vector<double> vec3 = {7.7, 8.8, 9.9};
-    std::vector<double> vec4 = {10.10, 11.11, 12.12};
+    // Inserimento di alcune scansioni
+    lidar.new_scan({1.0, 2.0, 3.0});
+    lidar.new_scan({4.0, 5.0, 6.0});
+    lidar.new_scan({7.0, 8.0, 9.0});
 
-    // Inserimento di vettori nel buffer
-    std::cout << "Enqueuing vec1:" << std::endl;
-    buffer.enqueue(vec1);
-    std::cout << buffer << std::endl;
+    // Stampa dello stato corrente
+    std::cout << "Stato corrente del LidarDriver:\n";
+    lidar.print_all_scans();
 
-    std::cout << "Enqueuing vec2:" << std::endl;
-    buffer.enqueue(vec2);
-    std::cout << buffer << std::endl;
-
-    std::cout << "Enqueuing vec3:" << std::endl;
-    buffer.enqueue(vec3);
-    std::cout << buffer << std::endl;
-
-    // Prova di sovrascrivere un elemento (perché il buffer è pieno)
-    std::cout << "Enqueuing vec4 (overflow, dovrebbe rimuovere vec1):" << std::endl;
-    buffer.enqueue(vec4);
-    std::cout << buffer << std::endl;
-
-    // Rimozione di un elemento (FIFO)
-    std::cout << "Dequeuing an element:" << std::endl;
-    std::vector<double> dequeued = buffer.dequeue();
-    std::cout << "Dequeued vector: ";
-    for (double val : dequeued) {
-        std::cout << val << " ";
-    }
-    std::cout << std::endl;
-    std::cout << buffer << std::endl;
-
-    // Accedere a un elemento tramite l'operatore []
-    std::cout << "Accessing an element by index (index 0):" << std::endl;
-    std::vector<double>& accessedVec = buffer[0];
-    std::cout << "Accessed vector: ";
-    for (double val : accessedVec) {
+    // Recupero dell'ultima scansione senza rimuoverla
+    std::cout << "Ultima scansione salvata: ";
+    for (double val : lidar.latest_scan()) {
         std::cout << val << " ";
     }
     std::cout << std::endl;
 
-    // Confronto tra due CircularArray
-    CircularArray anotherBuffer(3);
-    anotherBuffer.enqueue(vec2);
-    anotherBuffer.enqueue(vec3);
-    anotherBuffer.enqueue(vec4);
-
-    if (buffer == anotherBuffer) {
-        std::cout << "The buffers are equal." << std::endl;
-    } else {
-        std::cout << "The buffers are not equal." << std::endl;
+    // Recupero di una scansione dal buffer
+    std::vector<double> scan = lidar.get_scan();
+    std::cout << "Scansione piu' vecchia rimossa dal buffer: ";
+    for (double val : scan) {
+        std::cout << val << " ";
     }
-    
+    std::cout << std::endl;
+
+    // Stampa dello stato dopo la rimozione
+    std::cout << "Stato del LidarDriver dopo una rimozione:\n";
+    lidar.print_all_scans();
+
+    // Calcolo della distanza per un angolo specifico
+    try {
+        double angle = 45.0;
+        double distance = lidar.get_distance(angle);
+        std::cout << "Distanza per l'angolo " << angle << " gradi: " << distance << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Errore: " << e.what() << std::endl;
+    }
+
+    // Svuotamento del buffer
+    lidar.clear_buffer();
+    std::cout << "Buffer svuotato. Stato attuale:\n";
+    lidar.print_all_scans();
+
     int y;
     std::cin >> y;
     return 0;

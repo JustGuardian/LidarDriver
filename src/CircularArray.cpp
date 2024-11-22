@@ -1,6 +1,4 @@
-
 #include "../include/CircularArray.h"
-#include <stdexcept>
 #include <algorithm>
 
 // Metodo incremento indice
@@ -8,7 +6,7 @@ int CircularArray::incrementIndex(int index) const {
     return (index + 1) % BUFFER_DIM;
 }
 
-// Definizione costruttore di default
+// Costruttore di default
 CircularArray::CircularArray(int size)
   : buffer(size), 
     BUFFER_DIM(size), 
@@ -16,7 +14,7 @@ CircularArray::CircularArray(int size)
     tail(0), 
     dataSize(0) {}
 
-// Definizione copy constructor
+// Costruttore di copia
 CircularArray::CircularArray(const CircularArray &vecchioArray) 
   : buffer(vecchioArray.buffer), 
     BUFFER_DIM(vecchioArray.BUFFER_DIM), 
@@ -24,7 +22,7 @@ CircularArray::CircularArray(const CircularArray &vecchioArray)
     tail(vecchioArray.tail), 
     dataSize(vecchioArray.dataSize) {}
 
-// Definizione move constructor
+// Costruttore di move
 CircularArray::CircularArray(CircularArray &&vecchioArray) 
   : buffer(std::move(vecchioArray.buffer)), 
     BUFFER_DIM(vecchioArray.BUFFER_DIM), 
@@ -34,7 +32,7 @@ CircularArray::CircularArray(CircularArray &&vecchioArray)
     vecchioArray.head = vecchioArray.tail = vecchioArray.dataSize = 0;
 }
 
-// Metodo per svuotare completamente il buffer
+// Metodo per svuotare il buffer
 void CircularArray::clear() {
     std::for_each(buffer.begin(), buffer.end(), [](auto& v) { v.clear(); });
     head = tail = dataSize = 0;
@@ -51,7 +49,7 @@ void CircularArray::enqueue(const std::vector<double>& elemento) {
     ++dataSize;
 }
 
-// Metodo per inserire un vettore
+// Metodo per inserire un vettore con move semantics
 void CircularArray::enqueue(std::vector<double>&& elemento) {
     if (isFull()) {
         head = incrementIndex(head);
@@ -64,17 +62,29 @@ void CircularArray::enqueue(std::vector<double>&& elemento) {
 
 // Metodo per rimuovere il vettore più vecchio (FIFO)
 std::vector<double> CircularArray::dequeue() {
-    if (isEmpty()) {
-        throw std::underflow_error("Buffer vuoto.");
-    }
-    std::vector<double> elemento = std::move(buffer[head]);
-    head = incrementIndex(head); 
+    std::vector<double> elemento = std::move((*this)[0]); // Lancia eccezione se buffer vuoto
+    head = incrementIndex(head);
     --dataSize;
     return elemento;
 }
 
+// Restituisce il vettore più recente
+std::vector<double> CircularArray::getLatestVector() const {
+    if (isEmpty()) {
+        return {}; // Restituisce un vettore vuoto
+    }
+    int lastIndex = (tail == 0) ? BUFFER_DIM - 1 : tail - 1;
+    return buffer[lastIndex];
+}
+
 // Metodo per ottenere il numero di elementi nel buffer
 int CircularArray::getSize() const { return dataSize; }
+
+// Metodo per calcolare l'angolo
+double CircularArray::getAngle() const {
+    const std::vector<double>& lastVector = getLatestVector(); // Lancia eccezione se buffer vuoto
+    return 181.0 / lastVector.size();
+}
 
 // Metodo per controllare se il buffer è vuoto
 bool CircularArray::isEmpty() const { return dataSize == 0; }
@@ -82,16 +92,14 @@ bool CircularArray::isEmpty() const { return dataSize == 0; }
 // Metodo per controllare se il buffer è pieno
 bool CircularArray::isFull() const { return dataSize == BUFFER_DIM; }
 
-// Metodo per ottenere la dimensione del buffer
+// Metodo per ottenere la capacità del buffer
 int CircularArray::capacity() const { return BUFFER_DIM; }
 
 // Operatore di confronto (uguaglianza)
 bool CircularArray::operator==(const CircularArray& other) const {
-    // Confronta dimensione del buffer e numero di elementi
     if (BUFFER_DIM != other.BUFFER_DIM || dataSize != other.dataSize) {
         return false;
     }
-    // Confronta il contenuto del buffer in base alla posizione logica degli elementi
     for (int i = 0; i < dataSize; ++i) {
         if ((*this)[i] != other[i]) {
             return false;
@@ -122,7 +130,7 @@ const std::vector<double>& CircularArray::operator[](int indice) const {
 
 // Metodo per stampare lo stato del buffer
 void CircularArray::print(std::ostream& os) const {
-    os << "CircularArray (active elements): [ ";
+    os << "[ ";
     for (int i = 0; i < dataSize; ++i) {
         os << "[ ";
         for (double val : (*this)[i]) {
