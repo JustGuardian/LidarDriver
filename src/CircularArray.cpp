@@ -1,40 +1,64 @@
+
 #include "../include/CircularArray.h"
+#include <stdexcept>
+#include <algorithm>
+
 // Metodo per svuotare completamente il buffer
 void CircularArray::clear() {
-    buffer.clear();  // Rimuove tutti gli elementi dal buffer
-    head = 0;
-    tail = 0;
-    dataSize = 0;
+    std::for_each(buffer.begin(), buffer.end(), [](auto& v) { v.clear(); });
+    head = tail = dataSize = 0;
 }
 
 // Definizione costruttore di default
 CircularArray::CircularArray(int size)
-: buffer(size), BUFFER_DIM(size), head(0), tail(0), dataSize(0) {}
+  : buffer(size), 
+    BUFFER_DIM(size), 
+    head(0), 
+    tail(0), 
+    dataSize(0) {}
 
 // Definizione copy constructor
-CircularArray::CircularArray(const CircularArray &vecchioArray)
-: buffer(vecchioArray.buffer), BUFFER_DIM(vecchioArray.BUFFER_DIM), head(vecchioArray.head), tail(vecchioArray.tail), dataSize(vecchioArray.dataSize) {}
+CircularArray::CircularArray(const CircularArray &vecchioArray) 
+  : buffer(vecchioArray.buffer), 
+    BUFFER_DIM(vecchioArray.BUFFER_DIM), 
+    head(vecchioArray.head), 
+    tail(vecchioArray.tail), 
+    dataSize(vecchioArray.dataSize) {}
 
 // Definizione move constructor
-CircularArray::CircularArray(CircularArray &&vecchioArray)
-: buffer(vecchioArray.buffer), BUFFER_DIM(vecchioArray.BUFFER_DIM), head(vecchioArray.head), tail(vecchioArray.tail), dataSize(vecchioArray.dataSize) 
-{
+CircularArray::CircularArray(CircularArray &&vecchioArray) 
+  : buffer(std::move(vecchioArray.buffer)), 
+    BUFFER_DIM(vecchioArray.BUFFER_DIM), 
+    head(vecchioArray.head), 
+    tail(vecchioArray.tail), 
+    dataSize(vecchioArray.dataSize) {
     vecchioArray.head = vecchioArray.tail = vecchioArray.dataSize = 0;
 }
+
+// Metodo incremento indice
+int CircularArray::incrementIndex(int index) const {
+    return (index + 1) % BUFFER_DIM;
 }
 
 // Metodo per inserire un vettore nel buffer
 void CircularArray::enqueue(const std::vector<double>& elemento) {
     if (isFull()) {
-        // Dealloca il più vecchio elemento
-        buffer[head].clear();  // Svuota il vettore
-        head = (head + 1) % BUFFER_DIM; // Sposta la testa avanti
+        head = incrementIndex(head);
         --dataSize;
     }
-
-    // Inserisce il nuovo elemento nella posizione di coda
     buffer[tail] = elemento;
-    tail = (tail + 1) % BUFFER_DIM;
+    tail = incrementIndex(tail);
+    ++dataSize;
+}
+
+// Metodo per inserire un vettore
+void CircularArray::enqueue(std::vector<double>&& elemento) {
+    if (isFull()) {
+        head = incrementIndex(head);
+        --dataSize;
+    }
+    buffer[tail] = std::move(elemento);
+    tail = incrementIndex(tail);
     ++dataSize;
 }
 
@@ -43,11 +67,8 @@ std::vector<double> CircularArray::dequeue() {
     if (isEmpty()) {
         throw std::underflow_error("Buffer vuoto.");
     }
-
-    // Rimuove il vettore più vecchio
-    std::vector<double> elemento = buffer[head];
-    buffer[head].clear();  // Svuota il vettore
-    head = (head + 1) % BUFFER_DIM;
+    std::vector<double> elemento = std::move(buffer[head]);
+    head = incrementIndex(head); 
     --dataSize;
     return elemento;
 }
@@ -61,16 +82,18 @@ bool CircularArray::isEmpty() const { return dataSize == 0; }
 // Metodo per controllare se il buffer è pieno
 bool CircularArray::isFull() const { return dataSize == BUFFER_DIM; }
 
+// Metodo per ottenere la dimensione del buffer
+int CircularArray::capacity() const { return BUFFER_DIM; }
+
 // Operatore di confronto (uguaglianza)
-bool CircularArray::operator==(const CircularArray& other) {
-    // Confronta buffer_dim, head, tail, dataSize per evitare di confrontare subito tutti i dati
-    if (BUFFER_DIM != other.BUFFER_DIM || head != other.head || tail != other.tail || dataSize != other.dataSize) {
+bool CircularArray::operator==(const CircularArray& other) const {
+    // Confronta dimensione del buffer e numero di elementi
+    if (BUFFER_DIM != other.BUFFER_DIM || dataSize != other.dataSize) {
         return false;
     }
-
-    // Confronta il contenuto del buffer
-    for (int i = 0; i < BUFFER_DIM; ++i) {
-        if (buffer[i] != other.buffer[i]) {
+    // Confronta il contenuto del buffer in base alla posizione logica degli elementi
+    for (int i = 0; i < dataSize; ++i) {
+        if ((*this)[i] != other[i]) {
             return false;
         }
     }
@@ -78,7 +101,7 @@ bool CircularArray::operator==(const CircularArray& other) {
 }
 
 // Operatore di confronto (disuguaglianza)
-bool CircularArray::operator!=(const CircularArray& other) {
+bool CircularArray::operator!=(const CircularArray& other) const {
     return !(*this == other);
 }
 
@@ -99,19 +122,15 @@ const std::vector<double>& CircularArray::operator[](int indice) const {
 
 // Metodo per stampare lo stato del buffer
 void CircularArray::print(std::ostream& os) const {
-    os << "CircularArray: [ ";
-    for (int i = 0; i < BUFFER_DIM; ++i) {
-        if (!buffer[i].empty()) {
-            os << "[ ";
-            for (double val : buffer[i]) {
-                os << val << " ";
-            }
-            os << "] ";
-        } else {
-            os << "nullptr ";
+    os << "CircularArray (active elements): [ ";
+    for (int i = 0; i < dataSize; ++i) {
+        os << "[ ";
+        for (double val : (*this)[i]) {
+            os << val << " ";
         }
+        os << "] ";
     }
-    os << "]" << std::endl;
+    os << "]\n";
 }
 
 // Overloading dell'operatore di stampa <<
