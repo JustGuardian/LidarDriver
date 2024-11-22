@@ -14,17 +14,19 @@ private:
 
 public:
     // Costruttore: inizializza il buffer con la capacità specificata
-    explicit CircularArray(int size = 10) : buffer(size), BUFFER_DIM(size), head(0), tail(0), dataSize(0) {}
+    explicit CircularArray(int size = 10);
 
     // Costruttore di copia
-    CircularArray(const CircularArray &vecchioArray) 
-    : buffer(vecchioArray.buffer), BUFFER_DIM(vecchioArray.BUFFER_DIM), head(vecchioArray.head), tail(vecchioArray.tail), dataSize(vecchioArray.dataSize) {}
+    CircularArray(const CircularArray &vecchioArray);
+
+    // Costruttore di move
+    CircularArray(CircularArray &&vecchioArray);    
 
     // Assegnamento di copia
-    CircularArray& operator=(const CircularArray &newArray);
+    CircularArray& operator=(const CircularArray &vecchioArray);
     
     // Assegnamento di move
-    CircularArray& operator=(CircularArray &&newArray);
+    CircularArray& operator=(CircularArray &&vecchioArray);
     
     // Distruttore: non è necessario deallocare nulla poiché std::vector si occupa automaticamente della memoria
     ~CircularArray() = default;

@@ -7,6 +7,22 @@ void CircularArray::clear() {
     dataSize = 0;
 }
 
+// Definizione costruttore di default
+CircularArray::CircularArray(int size)
+: buffer(size), BUFFER_DIM(size), head(0), tail(0), dataSize(0) {}
+
+// Definizione copy constructor
+CircularArray::CircularArray(const CircularArray &vecchioArray)
+: buffer(vecchioArray.buffer), BUFFER_DIM(vecchioArray.BUFFER_DIM), head(vecchioArray.head), tail(vecchioArray.tail), dataSize(vecchioArray.dataSize) {}
+
+// Definizione move constructor
+CircularArray::CircularArray(CircularArray &&vecchioArray)
+: buffer(vecchioArray.buffer), BUFFER_DIM(vecchioArray.BUFFER_DIM), head(vecchioArray.head), tail(vecchioArray.tail), dataSize(vecchioArray.dataSize) 
+{
+    vecchioArray.head = vecchioArray.tail = vecchioArray.dataSize = 0;
+}
+}
+
 // Metodo per inserire un vettore nel buffer
 void CircularArray::enqueue(const std::vector<double>& elemento) {
     if (isFull()) {
