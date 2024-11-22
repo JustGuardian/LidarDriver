@@ -23,39 +23,6 @@ CircularArray::CircularArray(CircularArray &&vecchioArray)
 }
 }
 
-// Copy assignment
-CircularArray& CircularArray::operator=(const CircularArray &vecchioArray){
-    if (this != &vecchioArray) {  // Controllo per evitare auto-assegnamento
-        // Dealloco il vettore buffer
-        head = vecchioArray.head;
-        tail = vecchioArray.tail;
-        dataSize = vecchioArray.dataSize;
-        buffer = vecchioArray.buffer;
-    }
-    return *this;
-}
-
-// Move assignment
-CircularArray& CircularArray::operator=(CircularArray &&vecchioArray){
-    if (this != &vecchioArray) {  // Controllo per evitare auto-assegnamento
-        // Dealloco il vettore buffer
-        buffer.clear();
-        
-        // Trasferisco le dimensioni e lo stato
-        head = vecchioArray.head;
-        tail = vecchioArray.tail;
-        dataSize = vecchioArray.dataSize;
-        
-        // "Sposta" il buffer (prende il buffer di vecchioArray)
-        buffer = std::move(vecchioArray.buffer);
-        
-        // Pulisco vecchioArray
-        vecchioArray.head = vecchioArray.tail = vecchioArray.dataSize = 0;
-        vecchioArray.buffer.clear();
-    }
-    return *this;
-}
-
 // Metodo per inserire un vettore nel buffer
 void CircularArray::enqueue(const std::vector<double>& elemento) {
     if (isFull()) {
