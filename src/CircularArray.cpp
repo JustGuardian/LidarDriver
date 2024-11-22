@@ -62,7 +62,7 @@ void CircularArray::enqueue(std::vector<double>&& elemento) {
 
 // Metodo per rimuovere il vettore più vecchio (FIFO)
 std::vector<double> CircularArray::dequeue() {
-    std::vector<double> elemento = std::move((*this)[0]); // Lancia eccezione se buffer vuoto
+    std::vector<double> elemento = std::move(buffer[head]);
     head = incrementIndex(head);
     --dataSize;
     return elemento;
