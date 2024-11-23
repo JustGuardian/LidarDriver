@@ -6,9 +6,24 @@ LidarDriver::LidarDriver(int size) : array(size) {}
 // Costruttore di copia
 LidarDriver::LidarDriver(const LidarDriver& vect) : array(vect.array) {}
 
+//Formatta il vettore con le specifiche che sono richieste dall'esercizio
+std::vector<double> LidarDriver::adjust_scan_size(std::vector<double> vect) const {
+    const size_t minSize = 181;
+    const size_t maxSize = 181;
+
+    if (vect.size() < minSize){
+        vect.resize(minSize, 0.0);
+    }
+
+    if (vect.size() > maxSize){
+        vect.resize(maxSize);
+    }
+    return vect;
+}
+
 // Inserisce un nuovo vettore
-void LidarDriver::new_scan(std::vector<double> vect) {
-    array.enqueue(vect);
+void LidarDriver::new_scan(const std::vector<double>& vect) {
+    array.enqueue(adjust_scan_size(vect));
 }
 
 // Restituisce vettore più vecchio e lo rimuove dal buffer
