@@ -9,7 +9,7 @@ LidarDriver::LidarDriver(const LidarDriver& vect) : array(vect.array) {}
 //Formatta il vettore con le specifiche che sono richieste dall'esercizio
 std::vector<double> LidarDriver::adjust_scan_size(std::vector<double> vect) const {
     const size_t minSize = 181;
-    const size_t maxSize = 181;
+    const size_t maxSize = 1810;
 
     if (vect.size() < minSize){
         vect.resize(minSize, 0.0);
@@ -66,17 +66,24 @@ void LidarDriver::print_all_scans() const {
         std::cout << "[ ]" << std::endl;
         return;
     }
-
-    std::cout << "[ ";
+    
+    std::cout << "{\n";
     for (int i = 0; i < array.getSize(); ++i) {
         const std::vector<double>& scan = array[i];  // Accesso agli array memorizzati
-        std::cout << "[ ";
+
+        //std::cout << scan.size();
+        std::cout << "[";
         for (double val : scan) {
             std::cout << val << " ";
         }
-        std::cout << "] ";
+        if(i<array.getSize()-1){
+            std::cout << "],\n\n";
+        }else{
+             std::cout << "]\n";
+        }
+        
     }
-    std::cout << "]" << std::endl;
+    std::cout << "}" << std::endl;
 }
 
 
