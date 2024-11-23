@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <ctime>
 #include "../include/LidarDriver.h"
 
 int main() {
@@ -22,7 +23,8 @@ int main() {
 
         // Inserimento di un vettore con numeri casuali
         v.clear();
-        for(int i=1; i<181; i++){
+        std::srand(std::time(nullptr));
+        for(int i=1; i<600; i++){
             v.push_back(std::rand() % 101); //  Numero a caso tra 0 e 100
         }
         lidar.new_scan(v);
@@ -67,10 +69,14 @@ int main() {
     }
     catch (const std::exception& e) {
         std::cerr << "Errore: " << e.what() << "\n";
+        int f;
+        std::cout << "Premi un pulsante per terminare l'esecuzione" << std::endl;
+        std::cin >> f;
     }
 
     return 0;
 
     int y;
+    std::cout << "Premi un pulsante per terminare l'esecuzione" << std::endl;
     std::cin >> y;
 }
