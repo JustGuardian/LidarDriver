@@ -69,14 +69,11 @@ int main() {
     }
     catch (const std::exception& e) {
         std::cerr << "Errore: " << e.what() << "\n";
-        int f;
-        std::cout << "Premi un pulsante per terminare l'esecuzione" << std::endl;
-        std::cin >> f;
     }
-
-    return 0;
-
+    
     int y;
     std::cout << "Premi un pulsante per terminare l'esecuzione" << std::endl;
     std::cin >> y;
+
+    return 0;
 }
