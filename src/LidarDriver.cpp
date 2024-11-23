@@ -66,15 +66,22 @@ void LidarDriver::print_all_scans() const {
         std::cout << "[ ]" << std::endl;
         return;
     }
-
-    std::cout << "[ ";
+    
+    std::cout << "[\n";
     for (int i = 0; i < array.getSize(); ++i) {
         const std::vector<double>& scan = array[i];  // Accesso agli array memorizzati
-        std::cout << "[ ";
+
+        //std::cout << scan.size();
+        std::cout << "[";
         for (double val : scan) {
             std::cout << val << " ";
         }
-        std::cout << "] ";
+        if(i<array.getSize()-1){
+            std::cout << "],\n\n";
+        }else{
+             std::cout << "]\n";
+        }
+        
     }
     std::cout << "]" << std::endl;
 }
