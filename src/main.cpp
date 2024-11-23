@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "LidarDriver.h"
+#include "../include/LidarDriver.h"
 
 int main() {
     try {
