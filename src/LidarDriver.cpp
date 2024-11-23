@@ -44,7 +44,7 @@ void LidarDriver::clear_buffer() {
 // Restituisce la distanza associata a un angolo
 double LidarDriver::get_distance(double angle) const {
     if (array.isEmpty()) {
-        throw std::runtime_error("Il buffer è vuoto. Nessuna scansione disponibile per calcolare la distanza.");
+        throw std::runtime_error("Il buffer e' vuoto. Nessuna scansione disponibile per calcolare la distanza.");
     }
 
     if (angle < 0 || angle > 180) {
