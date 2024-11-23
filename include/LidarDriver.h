@@ -17,7 +17,7 @@ public:
     LidarDriver(const LidarDriver&); //costruttore di copia
 
     //metodi
-    void new_scan(std::vector<double>); //inserisce un nuovo vettore
+    void new_scan(const std::vector<double>&); //inserisce un nuovo vettore
     std::vector<double> get_scan();     //restituisce vettore più vecchio e lo rimuove dal buffer
     std::vector<double> latest_scan() const;    //restituisce vettore più nuovo senza rimuoverlo dal buffer
     void clear_buffer();        //svuota il buffer
