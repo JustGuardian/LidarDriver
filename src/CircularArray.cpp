@@ -129,7 +129,7 @@ const std::vector<double>& CircularArray::operator[](int indice) const {
 }
 
 // Metodo per stampare lo stato del buffer
-void CircularArray::print() const {
+void CircularArray::print_all() const {
     if (isEmpty()) {
         std::cout << "{ }" << std::endl;
         return;
