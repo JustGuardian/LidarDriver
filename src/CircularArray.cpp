@@ -141,7 +141,7 @@ void CircularArray::print_all() const {
         for (double val : (*this)[i]) {
             std::cout << val << " ";
         }
-        if(i<array.getSize()-1){
+        if(i<dataSize-1){
             std::cout << "],\n\n";
         }else{
              std::cout << "]\n";
