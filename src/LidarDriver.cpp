@@ -62,28 +62,7 @@ bool LidarDriver::is_buffer_empty() const { return array.isEmpty(); }
 bool LidarDriver::is_buffer_full() const { return array.isFull(); }
 
 void LidarDriver::print_all_scans() const {
-    if (array.isEmpty()) {
-        std::cout << "[ ]" << std::endl;
-        return;
-    }
-    
-    std::cout << "{\n";
-    for (int i = 0; i < array.getSize(); ++i) {
-        const std::vector<double>& scan = array[i];  // Accesso agli array memorizzati
-
-        //std::cout << scan.size();
-        std::cout << "[";
-        for (double val : scan) {
-            std::cout << val << " ";
-        }
-        if(i<array.getSize()-1){
-            std::cout << "],\n\n";
-        }else{
-             std::cout << "]\n";
-        }
-        
-    }
-    std::cout << "}" << std::endl;
+    array.print();
 }
 
 
