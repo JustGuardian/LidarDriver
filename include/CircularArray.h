@@ -40,7 +40,7 @@ public:
     const std::vector<double>& operator[](int indice) const;  // Accesso con indice relativo (const)
 
     // Stampa
-    void print(std::ostream& os) const;  // Stampa lo stato del buffer
+    void print() const;  // Stampa lo stato del buffer
     friend std::ostream& operator<<(std::ostream& os, const CircularArray& array);  // Operatore di stampa
 };
 
