@@ -135,16 +135,21 @@ void CircularArray::print_all() const {
         return;
     }
 
-    std::cout << "{ ";
+    std::cout << "{\n";
     for (int i = 0; i < dataSize; ++i) {
         std::cout << "[ ";
         for (double val : (*this)[i]) {
             std::cout << val << " ";
         }
-        std::cout << "] ";
+        if(i<array.getSize()-1){
+            std::cout << "],\n\n";
+        }else{
+             std::cout << "]\n";
+        }
     }
     std::cout << "}" << std::endl;
 }
+
 
 
 // Overloading dell'operatore di stampa <<
