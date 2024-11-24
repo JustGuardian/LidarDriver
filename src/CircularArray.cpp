@@ -129,20 +129,36 @@ const std::vector<double>& CircularArray::operator[](int indice) const {
 }
 
 // Metodo per stampare lo stato del buffer
-void CircularArray::print(std::ostream& os) const {
-    os << "[ ";
-    for (int i = 0; i < dataSize; ++i) {
-        os << "[ ";
-        for (double val : (*this)[i]) {
-            os << val << " ";
-        }
-        os << "] ";
+void CircularArray::print() const {
+    if (isEmpty()) {
+        std::cout << "{ }" << std::endl;
+        return;
     }
-    os << "]\n";
+
+    std::cout << "{ ";
+    for (int i = 0; i < dataSize; ++i) {
+        std::cout << "[ ";
+        for (double val : (*this)[i]) {
+            std::cout << val << " ";
+        }
+        std::cout << "] ";
+    }
+    std::cout << "}" << std::endl;
 }
+
 
 // Overloading dell'operatore di stampa <<
 std::ostream& operator<<(std::ostream& os, const CircularArray& array) {
-    array.print(os);
+    if (array.isEmpty()) {
+        os << "[ ]";
+    } else {
+        const std::vector<double>& lastVector = array.getLatestVector();
+        os << "[ ";
+        for (double val : lastVector) {
+            os << val << " ";
+        }
+        os << "]";
+    }
     return os;
 }
+
