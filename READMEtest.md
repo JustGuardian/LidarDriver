@@ -19,31 +19,28 @@ La classe `LidarDriver` rappresenta un **sensore LiDAR** che utilizza un buffer 
 
 ### Funzionalità principali:
 
-- **Costruttori**;
+- **Costruttori**:
   ```cpp
-  LidarDriver(size_t buffer_size);  // Costruttore che inizializza il LiDAR con un buffer circolare di capacità specificata
-  LidarDriver(const LidarDriver& other);  // Costruttore di copia per creare una nuova istanza da un'altra esistente
-
+  LidarDriver(int x = 10);       //costruttore di default
+  LidarDriver(const LidarDriver&); //costruttore di copia
 
 - **Gestione delle scansioni**:
   ```cpp
+  void clear_buffer();  // Svuota il buffer
   void new_scan(const std::vector<double>& scan);  // Aggiunge una nuova scansione al buffer
   std::vector<double> get_scan();  // Recupera e rimuove la scansione più vecchia
-  void clear_buffer();  // Svuota il buffer
-
-
-- **Analisi delle scansioni**;
+  
+- **Analisi delle scansioni**:
   ```cpp
-  double get_distance(double angle) const;  // Ottiene la distanza relativa a un angolo specifico
-  std::vector<double> latest_scan() const;  // Recupera l'ultima scansione acquisita senza rimuoverla
-
-
-- **Stampa**;
+  std::vector<double> latest_scan() const;  // Ultima scansione acquisita senza rimuoverla
+  double get_distance(double angle) const;  // Distanza relativa a un angolo specifico
+  
+- **Stampa**:
   ```cpp
-  void print_all_scans() const;  //metodo per stampare tutto il buffer
-  friend std::ostream& operator<<(std::ostream& os, const LidarDriver& driver);  //overloading dell'operatore di stampa (stampa l'ultima lista dati inserita)
+  void print_all_scans() const;  //Stampa tutto il buffer
+  friend std::ostream& operator<<(std::ostream& os, const LidarDriver& driver);  //Stampa l'ultima lista dati inserita
 
-- **Funzione adjust_scan_size**;
+- **Funzione adjust_scan_size**:
   ```cpp
   std::vector<double> adjust_scan_size(std::vector<double> scan) const;  // Normalizza la scansione a dimensioni tra 181 e 1810
 La funzione regola la dimensione di una scansione, aggiungendo zeri se la dimensione è inferiore a 181 o tagliando gli elementi se la scansione supera i 1810 elementi.
@@ -73,7 +70,7 @@ La classe `CircularArray` implementa un **buffer circolare** per gestire un nume
   ```cpp
   std::vector<double> getLatestVector() const;  // Restituisce l'ultimo vettore inserito
   int getSize() const;  // Ottiene la dimensione del buffer
-  double getAngle() const; //Ottiene la dimensione dell'angolo tra due misure dell'ultimo vettore inserito
+  double getAngle() const; //Ottiene angolo tra le misure dell'ultimo vettore inserito
   bool isEmpty() const;  // Verifica se il buffer è vuoto
   bool isFull() const;  // Verifica se il buffer è pieno
   int capacity() const;  // Ritorna la capacità del buffer
@@ -125,7 +122,7 @@ La classe `CircularArray` implementa un **buffer circolare** per gestire un nume
    
 2. Compilare il progetto:
    ```bash
-   c++ src/main.cpp src/CircularArray.cpp src/LidarDriver.cpp -o LidarDriverProject
+   g++ src/main.cpp src/CircularArray.cpp src/LidarDriver.cpp -o LidarDriverProject
 
 3. Eseguire il programma:
    ```bash
