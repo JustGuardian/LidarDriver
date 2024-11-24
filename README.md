@@ -102,8 +102,8 @@ La classe `CircularArray` implementa un **buffer circolare** per gestire un nume
   
 
 - **Implementazioni nella classe `CircularArray`**:
-  - `getSize()`: per verificare se il buffer è vuoto.
-  - `getAngle()`: per verificare se il buffer è pieno.
+  - `getSize()`: per ottenere il numero di elementi inseriti.
+  - `getAngle()`: per ottenere la dimensione dell'angolo tra le misure.
   - `operator==()` : per confrontare due oggetti `CircularArray`.
   - `operator!=` : per confrontare due oggetti `CircularArray`.
   - `operator[]` : per accedere ad un `vector<double>` salvato in `CircularArray`.
