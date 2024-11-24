@@ -92,40 +92,40 @@ La classe `CircularArray` implementa un **buffer circolare** per gestire un nume
 
 ## Contributi del team
 
-### Stevanin Michele
-- **Implementazione classe `LidarDriver`**:
-  `adjust_scan_size()`: per normalizzare la dimensione delle scansioni.
-  `new_scan()`: per aggiungere una nuova scansione al buffer.
-  `get_scan()`: per recuperare e rimuovere la scansione più vecchia.
-  `latest_scan()`: per ottenere l'ultima scansione senza rimuoverla.
-  `clear_buffer()`: per svuotare il buffer.
-
-- **Implementazione classe `CircularArray`**:
-  `enqueue()`: per aggiungere un elemento al buffer.
-  `dequeue()`: per rimuovere e restituire l'elemento più vecchio.
-  `clear()`: per svuotare il buffer.
-  `getLatestVector()`: per ottenere l'ultimo vettore inserito.
-  `isEmpty()`: per verificare se il buffer è vuoto.
-  `isFull()`: per verificare se il buffer è pieno.
-  
 ### Scabbia Fabrizio
-- **Implementazione classe `LidarDriver`**:
-  `get_distance()`: per ottenere la distanza relativa a un angolo specifico.
-  `is_buffer_empty()`: per verificare se il buffer è vuoto.
-  `is_buffer_full()`: per verificare se il buffer è pieno.
-  `print_all_scans()`: per stampare tutte le scansioni nel buffer.
-  `operator<<()`: per sovraccaricare l'operatore di output e permettere la stampa dell'oggetto `LidarDriver`.
+- **Implementazioni nella classe `LidarDriver`**:
+  - `get_distance()`: per ottenere la distanza relativa a un angolo specifico.
+  - `is_buffer_empty()`: per verificare se il buffer è vuoto.
+  - `is_buffer_full()`: per verificare se il buffer è pieno.
+  - `print_all_scans()`: per stampare tutte le scansioni nel buffer.
+  - `operator<<()`: per sovraccaricare l'operatore di output e permettere la stampa dell'oggetto `LidarDriver`.
   
 
-- **Implementazione classe `CircularArray`**:
-  `getSize()`: per verificare se il buffer è vuoto.
-  `getAngle()`: per verificare se il buffer è pieno.
-  `capacity()`: per ottenere la capacità massima del buffer.
-  `operator==()` : per confrontare due oggetti `CircularArray`
-  `operator!=` : per confrontare due oggetti `CircularArray`
-  `operator[]` : per accedere ad un `vector<double>` salvato in `CircularArray`
-  `print_all()` : : per stampare tutte le scansioni nel buffer.
-  `operator<<()` : per sovraccaricare l'operatore di output e permettere la stampa dell'oggetto `CircularArray`
+- **Implementazioni nella classe `CircularArray`**:
+  - `getSize()`: per verificare se il buffer è vuoto.
+  - `getAngle()`: per verificare se il buffer è pieno.
+  - `operator==()` : per confrontare due oggetti `CircularArray`.
+  - `operator!=` : per confrontare due oggetti `CircularArray`.
+  - `operator[]` : per accedere ad un `vector<double>` salvato in `CircularArray`.
+  - `print_all()` : per stampare tutte le scansioni nel buffer.
+  - `operator<<()` : per sovraccaricare l'operatore di output e permettere la stampa dell'oggetto `CircularArray`.
+  
+### Stevanin Michele
+- **Implementazioni nella classe `LidarDriver`**:
+  - `adjust_scan_size()`: per normalizzare la dimensione delle scansioni.
+  - `new_scan()`: per aggiungere una nuova scansione al buffer.
+  - `get_scan()`: per recuperare e rimuovere la scansione più vecchia.
+  - `latest_scan()`: per ottenere l'ultima scansione senza rimuoverla.
+  - `clear_buffer()`: per svuotare il buffer.
+
+- **Implementazioni nella classe `CircularArray`**:
+  - `enqueue()`: per aggiungere un elemento al buffer.
+  - `dequeue()`: per rimuovere e restituire l'elemento più vecchio.
+  - `clear()`: per svuotare il buffer.
+  - `getLatestVector()`: per ottenere l'ultimo vettore inserito.
+  - `capacity()`: per ottenere la capacità massima del buffer.
+  - `isEmpty()`: per verificare se il buffer è vuoto.
+  - `isFull()`: per verificare se il buffer è pieno.
   
 ---
 
@@ -140,7 +140,7 @@ La classe `CircularArray` implementa un **buffer circolare** per gestire un nume
     │   ├── CircularArray.cpp        # Implementazione della classe CircularArray
     │   └── LidarDriver.cpp          # Implementazione della classe LidarDriver
     ├── README.md                    # Documentazione del progetto
-    └── Prova intermedia 24_25.pdf   # Consegna del progetto
+    └── ProvaIntermedia24_25.pdf     # Consegna del progetto
   ```
 
 ---
