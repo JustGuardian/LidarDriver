@@ -121,11 +121,12 @@ La classe `CircularArray` implementa un **buffer circolare** per gestire un nume
 ## Istruzioni per l'uso
 1. Clonare il repository:
    ```bash
-   git clone https://github.com/username/LidarDriverProject.git
+   git clone https://github.com/JustGuardian/progetto-uni-intermedio
+   
 2. Compilare il progetto:
    ```bash
    c++ src/main.cpp src/CircularArray.cpp src/LidarDriver.cpp -o LidarDriverProject
 
 3. Eseguire il programma:
    ```bash
-   ./LidarDriverProject.exe
+   .\LidarDriverProject
