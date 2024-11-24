@@ -68,17 +68,7 @@ void LidarDriver::print_all_scans() const {
 
 // Overloading dell'operatore di stampa <<
 std::ostream& operator<<(std::ostream& os, const LidarDriver& driver) {
-    if (driver.is_buffer_empty()) {
-        os << "[ ]";
-        return os;
-    }
-
-    std::vector<double> lastScan = driver.latest_scan();
-    os << "[ ";
-    for (double val : lastScan) {
-        os << val << " ";
-    }
-    os << "]";
+    os << array;
     return os;
 }
 
