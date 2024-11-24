@@ -62,13 +62,13 @@ bool LidarDriver::is_buffer_empty() const { return array.isEmpty(); }
 bool LidarDriver::is_buffer_full() const { return array.isFull(); }
 
 void LidarDriver::print_all_scans() const {
-    array.print();
+    array.print_all();
 }
 
 
 // Overloading dell'operatore di stampa <<
 std::ostream& operator<<(std::ostream& os, const LidarDriver& driver) {
-    os << array;
+    os << driver.array;
     return os;
 }
 
