@@ -9,7 +9,7 @@ per gestire le scansioni in modo efficiente, garantendo un utilizzo ottimale del
 - **Gestione delle scansioni**: memorizzazione, recupero e analisi delle letture dal sensore.
 - **Flessibilità del buffer**: supporto per operazioni di sovrascrittura, dimensionamento dinamico e verifica di stato (vuoto/pieno).
 - **Accesso specifico ai dati**: possibilità di ottenere valori interpolati basati su angoli specifici.
-
+a
 ---
 
 # Classi e Funzionalità
