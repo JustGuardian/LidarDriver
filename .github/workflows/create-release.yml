@@ -1,0 +1,45 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger solo per i tag che iniziano con "v", es. "v1.0.0"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Git
+      run: git config --global --add safe.directory $GITHUB_WORKSPACE
+
+    - name: Build the project
+      run: |
+        mkdir build
+        cmake -S . -B build
+        cmake --build build --config Release
+
+    - name: Create release
+      id: create_release
+      uses: actions/create-release@v1
+      with:
+        tag_name: ${{ github.ref_name }}
+        release_name: Release ${{ github.ref_name }}
+        body: |
+          **Changelog**:
+          - Aggiunti miglioramenti.
+          - Correzioni di bug.
+        draft: false
+        prerelease: false
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Upload compiled binaries
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./build/main  # Path all'eseguibile compilato
+        asset_name: main_${{ github.ref_name }}.zip  # Nome file nella release
+        asset_content_type: application/zip
