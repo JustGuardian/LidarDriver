@@ -85,8 +85,8 @@ La classe `CircularArray` implementa un **buffer circolare** per gestire un nume
 
 - **Stampa**:
   ```cpp
-  void print(std::ostream& os) const;  // Stampa lo stato del buffer
-  friend std::ostream& operator<<(std::ostream& os, const CircularArray& array);  // Operatore di stampa
+  void print_all() const;  // Stampa tutto il buffer
+  friend std::ostream& operator<<(std::ostream& os, const CircularArray& array);  // Stampa l'ultima lista dati inserita
   
 ---
 
