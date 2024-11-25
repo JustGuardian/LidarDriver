@@ -140,6 +140,7 @@ La classe `CircularArray` implementa un **buffer circolare** per gestire un nume
     │   ├── CircularArray.cpp        # Implementazione della classe CircularArray
     │   └── LidarDriver.cpp          # Implementazione della classe LidarDriver
     ├── README.md                    # Documentazione del progetto
+    ├── CMakeLists.txt               # CMakeLists
     └── ProvaIntermedia24_25.pdf     # Consegna del progetto
   ```
 
