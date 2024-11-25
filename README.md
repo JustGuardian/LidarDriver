@@ -11,7 +11,7 @@ per gestire le scansioni in modo efficiente, garantendo un utilizzo ottimale del
 - **Accesso specifico ai dati**: possibilità di ottenere valori interpolati basati su angoli specifici.
 
 ---
-
+a
 # Classi e Funzionalità
 
 ## `LidarDriver`
