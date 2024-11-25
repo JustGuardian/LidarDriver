@@ -8,7 +8,7 @@ LidarDriver::LidarDriver(const LidarDriver& vect) : array(vect.array) {}
 
 //Formatta il vettore con le specifiche che sono richieste dall'esercizio
 std::vector<double> LidarDriver::adjust_scan_size(std::vector<double> vect) const {
-    const size_t minSize = 181;
+    const size_t minSize = 181
     const size_t maxSize = 1810;
 
     if (vect.size() < minSize){
