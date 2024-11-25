@@ -23,23 +23,23 @@ La classe `LidarDriver` rappresenta un **sensore LiDAR** che utilizza un buffer 
   ```cpp
   LidarDriver(int x = 10);  // Costruttore di default
   LidarDriver(const LidarDriver&);  // Costruttore di copia
-
+  ```
 - **Gestione delle scansioni**:
   ```cpp
   void clear_buffer();  // Svuota il buffer
   void new_scan(const std::vector<double>& scan);  // Aggiunge una nuova scansione al buffer
   std::vector<double> get_scan();  // Recupera e rimuove la scansione più vecchia
-  
+  ```
 - **Analisi delle scansioni**:
   ```cpp
   std::vector<double> latest_scan() const;  // Ultima scansione acquisita senza rimuoverla
   double get_distance(double angle) const;  // Distanza relativa a un angolo specifico
-  
+  ```
 - **Stampa**:
   ```cpp
   void print_all_scans() const;  // Stampa tutto il buffer
   friend std::ostream& operator<<(std::ostream& os, const LidarDriver& driver);  // Stampa l'ultima lista dati inserita
-
+  ```
 - **Funzione adjust_scan_size**:
   ```cpp
   std::vector<double> adjust_scan_size(std::vector<double> scan) const;  // Normalizza la scansione a dimensioni tra 181 e 1810
@@ -57,16 +57,16 @@ La classe `CircularArray` implementa un **buffer circolare** per gestire un nume
   CircularArray(int size = 10);  // Costruttore con dimensione
   CircularArray(const CircularArray &vecchioArray);  // Copy constructor
   CircularArray(CircularArray &&vecchioArray);  // Move constructor
-
+  ```
 - **Inserimento**:
   ```cpp
   void enqueue(const std::vector<double>& elemento);  // Aggiungi elemento al buffer
   void enqueue(std::vector<double>&& elemento);  // Aggiungi elemento al buffer (move)
-
+  ```
 - **Rimozione**:
   ```cpp
   std::vector<double> dequeue();  // Rimuove e ritorna l'elemento più vecchio
-
+  ```
 - **Accesso e verifica**:
   ```cpp
   std::vector<double> getLatestVector() const;  // Restituisce l'ultimo vettore inserito
@@ -75,18 +75,19 @@ La classe `CircularArray` implementa un **buffer circolare** per gestire un nume
   bool isEmpty() const;  // Verifica se il buffer è vuoto
   bool isFull() const;  // Verifica se il buffer è pieno
   int capacity() const;  // Ritorna la capacità del buffer
-
+  ```
 - **Operatori**:
   ```cpp
   bool operator==(const CircularArray& other) const;  // Confronta due CircularArray per uguaglianza
   bool operator!=(const CircularArray& other) const;  // Confronta due CircularArray per disuguaglianza
   std::vector<double>& operator[](int indice);  // Accesso con indice relativo
   const std::vector<double>& operator[](int indice) const;  // Accesso con indice relativo (const)
-
+  ```
 - **Stampa**:
   ```cpp
   void print_all() const;  // Stampa tutto il buffer
   friend std::ostream& operator<<(std::ostream& os, const CircularArray& array);  // Stampa l'ultima lista dati inserita
+  ```
   
 ---
 
@@ -150,11 +151,16 @@ La classe `CircularArray` implementa un **buffer circolare** per gestire un nume
 1. Clonare il repository:
    ```bash
    git clone https://github.com/JustGuardian/progetto-uni-intermedio
-   
+   ```  
 2. Compilare il progetto:
+   
+   usando *g++*:
    ```bash
    g++ src/main.cpp src/CircularArray.cpp src/LidarDriver.cpp -o LidarDriverProject
-
-3. Eseguire il programma:
+   ```
+   oppure usando *cmake* come visto a lezione.
+   
+4. Eseguire il programma:
    ```bash
    .\LidarDriverProject
+   ```
