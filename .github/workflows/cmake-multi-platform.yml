@@ -56,4 +56,5 @@ jobs:
 
     - name: Run tests
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      run: ./main  # Assumendo che `main` sia il nome del binario
+      run: ctest --build-config ${{ matrix.build_type }}
+
