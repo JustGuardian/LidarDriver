@@ -1,5 +1,7 @@
 # LidarDriverProject
 
+
+CIAO
 ## Descrizione del Progetto
 **LidarDriverProject** è un'implementazione simulata di un sensore LiDAR, sviluppata in C++ per gestire e analizzare scansioni di distanza angolari. 
 La classe principale, `LidarDriver`, utilizza un buffer circolare, implementato dalla classe `CircularArray`, 
