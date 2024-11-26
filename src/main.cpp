@@ -171,6 +171,7 @@ int main() {
         std::cerr << "Errore: " << e.what() << "\n";
     }
 
-
+    std::cout << "Premi Invio per continuare...\n";
+    std::cin.get(); // Attende fino a quando l'utente preme Invio
     return 0;
 }
