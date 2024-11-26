@@ -134,7 +134,7 @@ int main() {
     try {
         int angle_size;
         do {
-            std::cout << "Inserisci la dimensione del buffer (numero positivo): ";
+            std::cout << "Inserisci la risoluzione angolare (0.1 - 1): ";
             std::cin >> angle_size;
 
             if (std::cin.fail() || angle_size < 0.1 || angle_size > 1) {
