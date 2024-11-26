@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include <climits> // INT_MAX
 #include "../include/LidarDriver.h"
 
 void print_menu() {
@@ -37,10 +38,8 @@ void add_new_scan(LidarDriver& lidar) {
 
     std::vector<double> v(num_elements);
     std::cout << "Inserisci gli elementi del vettore (separati da spazio): ";
-    int count = 0;
     for (double& val : v) {
         std::cin >> val;
-
         if (std::cin.fail()) {
             std::cout << "Errore: input non valido.\n";
             clearInputStream();
