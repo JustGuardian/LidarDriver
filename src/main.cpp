@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include <climits> // INT_MAX
 #include "../include/LidarDriver.h"
 
 void print_menu() {
@@ -14,6 +15,11 @@ void print_menu() {
     std::cout << "7. Aggiungi un vettore di elementi casuali\n";
     std::cout << "0. Esci\n";
     std::cout << "Scelta: ";
+}
+
+void clearInputStream(){
+    std::cin.clear();
+    std::cin.ignore(INT_MAX, '\n');
 }
 
 void add_new_scan(LidarDriver& lidar) {
@@ -36,11 +42,12 @@ void add_new_scan(LidarDriver& lidar) {
         std::cin >> val;
         if (std::cin.fail()) {
             std::cout << "Errore: input non valido.\n";
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
+            clearInputStream();
             val = 0; // Imposta un valore predefinito per proseguire
         }
     }
+
+    clearInputStream();
     lidar.new_scan(v);
     std::cout << "Vettore aggiunto con successo.\n";
 }
@@ -69,14 +76,13 @@ void get_distance_for_angle(LidarDriver& lidar) {
 
             if (std::cin.fail() || angle < 0 || angle > 180) {
                 std::cout << "Errore: devi inserire un numero compreso tra 0 e 180.\n";
-                std::cin.clear();
-                std::cin.ignore(10000, '\n');
+                clearInputStream();
             } else {
                 valid_input = true;
             }
         } while (!valid_input);
 
-        std::cout << "Distanza per angolo " << angle << ": " 
+        std::cout << "\nDistanza per angolo " << angle << ": " 
                   << lidar.get_distance(angle) << "\n";
     } else {
         std::cout << "Il buffer è vuoto.\n";
@@ -109,8 +115,7 @@ void add_random_scan(LidarDriver& lidar) {
 
         if (std::cin.fail() || num_elements <= 0) {
             std::cout << "Errore: devi inserire un numero intero positivo.\n";
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
+            clearInputStream();
             num_elements = -1;
         }
     } while (num_elements <= 0);
@@ -127,7 +132,7 @@ void add_random_scan(LidarDriver& lidar) {
 
 int main() {
     try {
-        
+       
         LidarDriver lidar();
         int scelta;
 
@@ -137,11 +142,11 @@ int main() {
 
             if (std::cin.fail()) {
                 std::cout << "Errore: devi inserire un numero valido.\n";
-                std::cin.clear();
-                std::cin.ignore(10000, '\n');
+                clearInputStream();
                 scelta = -1;
                 continue;
             }
+
 
             switch (scelta) {
                 case 1: add_new_scan(lidar); break;
