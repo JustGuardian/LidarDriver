@@ -43,7 +43,7 @@ void display_last_scan(LidarDriver& lidar) {
     if (!lidar.is_buffer_empty()) {
         std::cout << "Ultima scansione: " << lidar << "\n";
     } else {
-        std::cout << "Il buffer è vuoto.\n";
+        std::cout << "Il buffer e' vuoto.\n";
     }
 }
 
@@ -72,7 +72,7 @@ void get_distance_for_angle(LidarDriver& lidar) {
         std::cout << "\nDistanza per angolo " << angle << ": " 
                   << lidar.get_distance(angle) << "\n";
     } else {
-        std::cout << "Il buffer è vuoto.\n";
+        std::cout << "Il buffer e' vuoto.\n";
     }
 }
 
@@ -85,7 +85,7 @@ void remove_oldest_scan(LidarDriver& lidar) {
         }
         std::cout << "]\n";
     } else {
-        std::cout << "Il buffer è già vuoto.\n";
+        std::cout << "Il buffer e' gia' vuoto.\n";
     }
 }
 

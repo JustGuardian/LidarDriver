@@ -58,20 +58,27 @@ double LidarDriver::get_distance(double angle) const {
     return array.getLatestVector()[static_cast<int>(std::round(angle / get_angle()))];
 }
 
+//capacità buffer
 int LidarDriver::get_capacity() const{ return DIM_BUFFER; }
 
+//numero elementi nel buffer
 int LidarDriver::get_size() const{ return array.getSize(); }
 
+//numero di elementi in ogni singolo vettore
 int LidarDriver::get_num_elementi() const{
     return static_cast<int>(std::round(angle / get_angle()));
 }
 
+//risoluzione angolare
 double LidarDriver::get_angle() const{ return angle; }
 
+//1 se vettore è vuoto
 bool LidarDriver::is_buffer_empty() const { return array.isEmpty(); }
 
+//1 se vettore è pieno
 bool LidarDriver::is_buffer_full() const { return array.isFull(); }
 
+//stampa l'intero buffer
 void LidarDriver::print_all_scans() const { array.print_all();}
 
 // Overloading dell'operatore di stampa <<

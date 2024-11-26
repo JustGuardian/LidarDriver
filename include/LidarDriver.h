@@ -11,7 +11,7 @@ class LidarDriver{
 private:
     CircularArray array;
     const int DIM_BUFFER = 10; // Dimensione fissa del buffer
-    const double angle;
+    const double angle;     //risoluzione angolare
     std::vector<double> adjust_scan_size(std::vector<double>) const;    //controlla il numero di elementi della lista da inserire (se size<181 riempie con 0 fino a 181, se size > 1810 taglia gli elementi dopo)
 public:
     //costruttori
