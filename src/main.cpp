@@ -133,7 +133,7 @@ void add_random_scan(LidarDriver& lidar) {
 int main() {
     try {
        
-        LidarDriver lidar();
+        LidarDriver lidar;
         int scelta;
 
         do {
