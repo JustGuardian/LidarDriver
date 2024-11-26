@@ -29,17 +29,17 @@ La classe `LidarDriver` rappresenta un **sensore LiDAR** che utilizza un buffer 
   void clear_buffer();  // Svuota il buffer
   void new_scan(const std::vector<double>& scan);  // Aggiunge una nuova scansione al buffer
   std::vector<double> get_scan();  // Recupera e rimuove la scansione più vecchia
+  ```
+- **Analisi delle scansioni**:
+  ```cpp
+  std::vector<double> latest_scan() const;  // Ultima scansione acquisita senza rimuoverla
+  double get_distance(double angle) const;  // Distanza relativa a un angolo specifico
   int get_capacity() const;   //resituisce valore di DIM_BUFFER
   int get_size() const; //restituisce il numero di elementi nel buffer
   int get_num_elementi() const; //restituisce il numero di elementi contenuti in ogni vettore
   double get_angle() const;   //restituisce valore di angle
   bool is_buffer_empty() const;    //restituisce 1 se è vuoto
   bool is_buffer_full() const;    //restituisce 1 se è pieno
-  ```
-- **Analisi delle scansioni**:
-  ```cpp
-  std::vector<double> latest_scan() const;  // Ultima scansione acquisita senza rimuoverla
-  double get_distance(double angle) const;  // Distanza relativa a un angolo specifico
   ```
 - **Stampa**:
   ```cpp
