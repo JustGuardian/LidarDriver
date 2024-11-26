@@ -97,7 +97,7 @@ int main() {
                         std::cout << "Inserisci l'angolo: ";
                         std::cin >> angle;
 
-                        if (std::cin.fail()) {
+                        if (std::cin.fail() || angle < 0 || angle > 180) {
                             std::cout << "Errore: input non valido.\n";
                             std::cin.clear();
                             std::cin.ignore(10000, '\n');
