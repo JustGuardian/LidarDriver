@@ -71,9 +71,9 @@ int main() {
         std::cerr << "Errore: " << e.what() << "\n";
     }
     
-    int y;
-    std::cout << "Premi un pulsante per terminare l'esecuzione" << std::endl;
-    std::cin >> y;
+    std::cout << "Premi Invio per continuare...\n";
+    std::cin.get(); // Attende fino a quando l'utente preme Invio
+    return 0;
 
     return 0;
 }
