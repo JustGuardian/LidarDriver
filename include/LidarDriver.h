@@ -14,7 +14,7 @@ private:
     const int DIM_BUFFER = 10;
 public:
     //costruttori
-    LidarDriver(DIM_BUFFER);       //costruttore di default
+    LidarDriver();       //costruttore di default
     LidarDriver(const LidarDriver&); //costruttore di copia
 
     //metodi
