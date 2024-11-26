@@ -47,12 +47,12 @@ La classe `LidarDriver` rappresenta un **sensore LiDAR** che utilizza un buffer 
   friend std::ostream& operator<<(std::ostream& os, const LidarDriver& driver);  // Stampa l'ultima lista dati inserita
   
   ```
-- **Funzione adjust_scan_size**:
+- **Funzioni ausiliare**:
   ```cpp
   std::vector<double> adjust_scan_size(std::vector<double> scan) const;  // Normalizza la scansione a dimensioni tra 181 e 1810
   size_t calculate_scan_size() const; //calcola il numero di elementi in ogni vettore
   ```
-  La funzione regola la dimensione di una scansione, aggiungendo zeri se la dimensione è inferiore a 181 o tagliando gli elementi se la scansione supera i 1810 elementi.
+  La funzione `adjust_scan_size` regola la dimensione di una scansione, aggiungendo zeri se la dimensione è inferiore a 181 o tagliando gli elementi se la scansione supera i 1810 elementi.
 
 
 ## `CircularArray`
