@@ -24,12 +24,12 @@ void clearInputStream(){
 
 void add_new_scan(LidarDriver& lidar) {
     std::vector<double> v(lidar.get_num_elementi());
-    std::cout << "Inserisci gli elementi del vettore (separati da spazio): ";
+    std::cout << "Inserisci tutti gli elementi del vettore (separati da spazio): ";
     for (double& val : v) {
         while (true) {
             std::cin >> val;
             if (std::cin.fail()) {
-                std::cout << "Errore: input non valido. Riprova: ";
+                std::cout << "Errore: input non valido. Reinserilo: ";
                 clearInputStream();
             } else {
                 break;
