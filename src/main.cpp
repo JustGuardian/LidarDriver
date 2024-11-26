@@ -127,20 +127,8 @@ void add_random_scan(LidarDriver& lidar) {
 
 int main() {
     try {
-        int buffer_size;
-        do {
-            std::cout << "Inserisci la dimensione del buffer (numero positivo): ";
-            std::cin >> buffer_size;
-
-            if (std::cin.fail() || buffer_size <= 0) {
-                std::cout << "Errore: devi inserire un numero intero positivo.\n";
-                std::cin.clear();
-                std::cin.ignore(10000, '\n');
-                buffer_size = -1;
-            }
-        } while (buffer_size <= 0);
-
-        LidarDriver lidar(buffer_size);
+        
+        LidarDriver lidar();
         int scelta;
 
         do {
