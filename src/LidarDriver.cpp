@@ -1,7 +1,7 @@
 #include "../include/LidarDriver.h"
 
 // Costruttore di default
-LidarDriver::LidarDriver(int size) : array(size) {}
+LidarDriver::LidarDriver() : array(DIM_BUFFER) {}
 
 // Costruttore di copia
 LidarDriver::LidarDriver(const LidarDriver& vect) : array(vect.array) {}
