@@ -11,9 +11,10 @@ class LidarDriver{
 private:
     CircularArray array;
     std::vector<double> adjust_scan_size(std::vector<double>) const;    //controlla il numero di elementi della lista da inserire (se size<181 riempie con 0 fino a 181, se size > 1810 taglia gli elementi dopo)
+    const int DIM_BUFFER = 10;
 public:
     //costruttori
-    LidarDriver(int x = 10);       //costruttore di default
+    LidarDriver(DIM_BUFFER);       //costruttore di default
     LidarDriver(const LidarDriver&); //costruttore di copia
 
     //metodi
