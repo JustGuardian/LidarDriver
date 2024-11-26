@@ -80,12 +80,6 @@ std::vector<double> CircularArray::getLatestVector() const {
 // Metodo per ottenere il numero di elementi nel buffer
 int CircularArray::getSize() const { return dataSize; }
 
-// Metodo per calcolare l'angolo
-double CircularArray::getAngle() const {
-    const std::vector<double>& lastVector = getLatestVector(); // Lancia eccezione se buffer vuoto
-    return 181.0 / lastVector.size();
-}
-
 // Metodo per controllare se il buffer è vuoto
 bool CircularArray::isEmpty() const { return dataSize == 0; }
 
@@ -121,6 +115,7 @@ std::vector<double>& CircularArray::operator[](int indice) {
     return buffer[(head + indice) % BUFFER_DIM];
 }
 
+// Metodo costante per accedere agli elementi tramite indice relativo
 const std::vector<double>& CircularArray::operator[](int indice) const {
     if (indice < 0 || indice >= dataSize) {
         throw std::out_of_range("Indice fuori dai limiti.");
