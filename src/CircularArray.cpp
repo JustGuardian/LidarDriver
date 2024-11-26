@@ -80,12 +80,6 @@ std::vector<double> CircularArray::getLatestVector() const {
 // Metodo per ottenere il numero di elementi nel buffer
 int CircularArray::getSize() const { return dataSize; }
 
-// Metodo per calcolare l'angolo
-double CircularArray::getAngle() const {
-    const std::vector<double>& lastVector = getLatestVector(); // Lancia eccezione se buffer vuoto
-    return 181.0 / lastVector.size();
-}
-
 // Metodo per controllare se il buffer è vuoto
 bool CircularArray::isEmpty() const { return dataSize == 0; }
 

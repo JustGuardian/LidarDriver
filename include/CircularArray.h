@@ -28,7 +28,6 @@ public:
     std::vector<double> dequeue();  // Rimuove e ritorna l'elemento più vecchio
     std::vector<double> getLatestVector() const;  // Restituisce l'ultimo vettore inserito
     int getSize() const;  // Ottiene il numero di elementi nel buffer
-    double getAngle() const; //Ottiene la dimensione dell'angolo tra due misure dell'ultimo vettore inserito
     bool isEmpty() const;  // Verifica se il buffer è vuoto
     bool isFull() const;  // Verifica se il buffer è pieno
     int capacity() const;  // Ritorna la capacità del buffer
