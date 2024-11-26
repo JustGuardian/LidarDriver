@@ -8,12 +8,12 @@ LidarDriver::LidarDriver(int x)
 // Costruttore di copia
 LidarDriver::LidarDriver(const LidarDriver& vect) 
   : array(vect.array),
-    DIM_BUFFER(vect.DIM_BUFFER),
+    DIM_BUFFER(vect.get_capacity()),
     angle(vect.angle) {}
 
 //Formatta il vettore con le specifiche che sono richieste dall'esercizio
 std::vector<double> LidarDriver::adjust_scan_size(std::vector<double> vect) const {
-    const size_t size = 180/angle + 1;
+    const size_t size = static_cast<int>(std::round(180.0 / angle + 1));
 
     if (vect.size() < size){
         vect.resize(size, 0.0);
@@ -66,7 +66,7 @@ int LidarDriver::get_size() const{ return array.getSize(); }
 
 //numero di elementi in ogni singolo vettore
 int LidarDriver::get_num_elementi() const{
-    return static_cast<int>(std::round(angle / get_angle()));
+    return static_cast<int>(std::round(180.0 / angle + 1));
 }
 
 //risoluzione angolare
