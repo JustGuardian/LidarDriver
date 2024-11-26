@@ -16,7 +16,7 @@ private:
     size_t calculate_scan_size() const;
 public:
     //costruttori
-    LidarDriver(int x = 0.5);       //costruttore di default
+    LidarDriver(double x = 0.5);       //costruttore di default
     LidarDriver(const LidarDriver&); //costruttore di copia
 
     //metodi

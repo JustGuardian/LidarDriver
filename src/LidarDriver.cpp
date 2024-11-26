@@ -1,7 +1,7 @@
 #include "../include/LidarDriver.h"
 
 // Costruttore di default
-LidarDriver::LidarDriver(int x) 
+LidarDriver::LidarDriver(double x) 
   : array(DIM_BUFFER),
     angle(x >= 0.1 && x <= 1 ? x : (x < 0.1 ? 0.1 : 1)) {}
 
