@@ -10,7 +10,7 @@ void print_menu() {
     std::cout << "2. Visualizza l'ultimo vettore\n";
     std::cout << "3. Visualizza tutte le scansioni nel buffer\n";
     std::cout << "4. Ottieni la distanza per un angolo\n";
-    std::cout << "5. Rimuovi il vettore più vecchio\n";
+    std::cout << "5. Rimuovi il vettore piu' vecchio\n";
     std::cout << "6. Svuota il buffer\n";
     std::cout << "7. Aggiungi un vettore di elementi casuali\n";
     std::cout << "0. Esci\n";
@@ -98,19 +98,7 @@ void clear_buffer(LidarDriver& lidar) {
 }
 
 void add_random_scan(LidarDriver& lidar) {
-    int num_elements;
-    do {
-        std::cout << "Inserisci il numero di elementi casuali (numero positivo): ";
-        std::cin >> num_elements;
-
-        if (std::cin.fail() || num_elements <= 0) {
-            std::cout << "Errore: devi inserire un numero intero positivo.\n";
-            clearInputStream();
-            num_elements = -1;
-        }
-    } while (num_elements <= 0);
-
-    std::vector<double> random_vector(num_elements);
+    std::vector<double> random_vector(lidar.get_num_elementi());
     std::srand(std::time(nullptr));
     for (double& val : random_vector) {
         val = std::rand() % 101;
