@@ -60,16 +60,19 @@ double LidarDriver::get_distance(double angle) const {
 
 int LidarDriver::get_capacity() const{ return DIM_BUFFER; }
 
+int LidarDriver::get_size() const{ return array.getSize(); }
+
+int LidarDriver::get_num_elementi() const{
+    return static_cast<int>(std::round(angle / get_angle()));
+}
+
 double LidarDriver::get_angle() const{ return angle; }
 
 bool LidarDriver::is_buffer_empty() const { return array.isEmpty(); }
 
 bool LidarDriver::is_buffer_full() const { return array.isFull(); }
 
-void LidarDriver::print_all_scans() const {
-    array.print_all();
-}
-
+void LidarDriver::print_all_scans() const { array.print_all();}
 
 // Overloading dell'operatore di stampa <<
 std::ostream& operator<<(std::ostream& os, const LidarDriver& driver) {

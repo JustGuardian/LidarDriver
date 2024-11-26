@@ -115,6 +115,7 @@ std::vector<double>& CircularArray::operator[](int indice) {
     return buffer[(head + indice) % BUFFER_DIM];
 }
 
+// Metodo costante per accedere agli elementi tramite indice relativo
 const std::vector<double>& CircularArray::operator[](int indice) const {
     if (indice < 0 || indice >= dataSize) {
         throw std::out_of_range("Indice fuori dai limiti.");

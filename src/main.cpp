@@ -23,20 +23,7 @@ void clearInputStream(){
 }
 
 void add_new_scan(LidarDriver& lidar) {
-    int num_elements;
-    do {
-        std::cout << "Inserisci il numero di elementi del vettore (numero positivo): ";
-        std::cin >> num_elements;
-
-        if (std::cin.fail() || num_elements <= 0) {
-            std::cout << "Errore: devi inserire un numero intero positivo.\n";
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
-            num_elements = -1;
-        }
-    } while (num_elements <= 0);
-
-    std::vector<double> v(num_elements);
+    std::vector<double> v(lidar.get_num_elementi());
     std::cout << "Inserisci gli elementi del vettore (separati da spazio): ";
     for (double& val : v) {
         std::cin >> val;

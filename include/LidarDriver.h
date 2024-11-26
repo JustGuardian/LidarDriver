@@ -25,6 +25,8 @@ public:
     void clear_buffer();        //svuota il buffer
     double get_distance(double) const;    //resituisce la distanza del vettore più recente di quel relativo angolo
     int get_capacity() const;   //resituisce valore di DIM_BUFFER
+    int get_size() const; //restituisce il numero di elementi nel buffer
+    int get_num_elementi() const; //restituisce il numero di elementi contenuti in ogni vettore
     double get_angle() const;   //restituisce valore di angle
     bool is_buffer_empty() const;    //restituisce 1 se è vuoto
     bool is_buffer_full() const;    //restituisce 1 se è pieno
