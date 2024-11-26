@@ -3,77 +3,175 @@
 #include <ctime>
 #include "../include/LidarDriver.h"
 
-int main() {
-    try {
-        // Creazione di un LidarDriver con un buffer di dimensione 3
-        LidarDriver lidar(3);
+void print_menu() {
+    std::cout << "\nMenu:\n";
+    std::cout << "1. Aggiungi un nuovo vettore\n";
+    std::cout << "2. Visualizza l'ultimo vettore\n";
+    std::cout << "3. Visualizza tutte le scansioni nel buffer\n";
+    std::cout << "4. Ottieni la distanza per un angolo\n";
+    std::cout << "5. Rimuovi il vettore più vecchio\n";
+    std::cout << "6. Svuota il buffer\n";
+    std::cout << "7. Aggiungi un vettore di elementi casuali\n";
+    std::cout << "0. Esci\n";
+    std::cout << "Scelta: ";
+}
 
-        // Inserimento di scansioni nel buffer
-        std::cout << "Inserisco scansioni...\n";
+void add_new_scan(LidarDriver& lidar) {
+    int num_elements;
+    do {
+        std::cout << "Inserisci il numero di elementi del vettore (numero positivo): ";
+        std::cin >> num_elements;
 
-        // Test per vedere se il vettore viene troncato correttamente al numero di misure richiesto
-        std::vector<double> v;
-        for(int i=1; i<400; i++){
-            v.push_back(i);
+        if (std::cin.fail() || num_elements <= 0) {
+            std::cout << "Errore: devi inserire un numero intero positivo.\n";
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            num_elements = -1;
         }
-        lidar.new_scan(v);
+    } while (num_elements <= 0);
 
-        lidar.new_scan({ 4.0, 5.0 });
-        lidar.new_scan({ 6.0, 7.0, 8.0, 9.0 });
-
-        // Inserimento di un vettore con numeri casuali
-        v.clear();
-        std::srand(std::time(nullptr));
-        for(int i=1; i<600; i++){
-            v.push_back(std::rand() % 101); //  Numero a caso tra 0 e 100
+    std::vector<double> v(num_elements);
+    std::cout << "Inserisci gli elementi del vettore (separati da spazio): ";
+    for (double& val : v) {
+        std::cin >> val;
+        if (std::cin.fail()) {
+            std::cout << "Errore: input non valido.\n";
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            val = 0; // Imposta un valore predefinito per proseguire
         }
-        lidar.new_scan(v);
+    }
+    lidar.new_scan(v);
+    std::cout << "Vettore aggiunto con successo.\n";
+}
 
-        // Stampa dell'ultimo vettore inserito
-        std::cout << "\nUltima scansione: " << lidar << "\n";
+void display_last_scan(LidarDriver& lidar) {
+    if (!lidar.is_buffer_empty()) {
+        std::cout << "Ultima scansione: " << lidar << "\n";
+    } else {
+        std::cout << "Il buffer è vuoto.\n";
+    }
+}
 
-        // Stampa di tutte le scansioni nel buffer
-        std::cout << "\nTutte le scansioni nel buffer:\n";
-        lidar.print_all_scans();
+void display_all_scans(LidarDriver& lidar) {
+    std::cout << "Tutte le scansioni nel buffer:\n";
+    lidar.print_all_scans();
+}
 
-        // Ottieni la distanza associata a un angolo
-        double angle = 0.5;
-        std::cout << "\nDistanza per angolo " << angle << ": "
-            << lidar.get_distance(angle) << "\n";
+void get_distance_for_angle(LidarDriver& lidar) {
+    if (!lidar.is_buffer_empty()) {
+        double angle;
+        bool valid_input = false;
 
-        // Rimuovo il vettore più vecchio
-        std::cout << "\nRimuovo la scansione piu' vecchia...\n";
-        std::vector<double> removedScan = lidar.get_scan();
-        std::cout << "\nScansione rimossa: [ ";
-        for (double val : removedScan) {
+        do {
+            std::cout << "Inserisci l'angolo (0-180 gradi): ";
+            std::cin >> angle;
+
+            if (std::cin.fail() || angle < 0 || angle > 180) {
+                std::cout << "Errore: devi inserire un numero compreso tra 0 e 180.\n";
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+            } else {
+                valid_input = true;
+            }
+        } while (!valid_input);
+
+        std::cout << "Distanza per angolo " << angle << ": " 
+                  << lidar.get_distance(angle) << "\n";
+    } else {
+        std::cout << "Il buffer è vuoto.\n";
+    }
+}
+
+void remove_oldest_scan(LidarDriver& lidar) {
+    if (!lidar.is_buffer_empty()) {
+        std::vector<double> removed_scan = lidar.get_scan();
+        std::cout << "Scansione rimossa: [ ";
+        for (double val : removed_scan) {
             std::cout << val << " ";
         }
-        std::cout << "]\n\n";
-
-        // Stampa delle scansioni rimanenti nel buffer
-        std::cout << "Stato attuale del buffer:\n";
-        lidar.print_all_scans();
-
-        // Pulizia del buffer
-        std::cout << "\nSvuoto il buffer...\n";
-        lidar.clear_buffer();
-
-        // Controllo buffer vuoto
-        std::cout << "\nStato attuale del buffer:\n";
-        lidar.print_all_scans();
-
-        // Provo ad accedere alla distanza quando il buffer è vuoto
-        std::cout << "\nProvo a calcolare la distanza con buffer vuoto:\n";
-        std::cout << lidar.get_distance(angle) << "\n"; // Questo lancerà un'eccezione
-
+        std::cout << "]\n";
+    } else {
+        std::cout << "Il buffer è già vuoto.\n";
     }
-    catch (const std::exception& e) {
+}
+
+void clear_buffer(LidarDriver& lidar) {
+    lidar.clear_buffer();
+    std::cout << "Buffer svuotato con successo.\n";
+}
+
+void add_random_scan(LidarDriver& lidar) {
+    int num_elements;
+    do {
+        std::cout << "Inserisci il numero di elementi casuali (numero positivo): ";
+        std::cin >> num_elements;
+
+        if (std::cin.fail() || num_elements <= 0) {
+            std::cout << "Errore: devi inserire un numero intero positivo.\n";
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            num_elements = -1;
+        }
+    } while (num_elements <= 0);
+
+    std::vector<double> random_vector(num_elements);
+    std::srand(std::time(nullptr));
+    for (double& val : random_vector) {
+        val = std::rand() % 101;
+    }
+
+    lidar.new_scan(random_vector);
+    std::cout << "Vettore casuale aggiunto con successo.\n";
+}
+
+int main() {
+    try {
+        int buffer_size;
+        do {
+            std::cout << "Inserisci la dimensione del buffer (numero positivo): ";
+            std::cin >> buffer_size;
+
+            if (std::cin.fail() || buffer_size <= 0) {
+                std::cout << "Errore: devi inserire un numero intero positivo.\n";
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+                buffer_size = -1;
+            }
+        } while (buffer_size <= 0);
+
+        LidarDriver lidar(buffer_size);
+        int scelta;
+
+        do {
+            print_menu();
+            std::cin >> scelta;
+
+            if (std::cin.fail()) {
+                std::cout << "Errore: devi inserire un numero valido.\n";
+                std::cin.clear();
+                std::cin.ignore(10000, '\n');
+                scelta = -1;
+                continue;
+            }
+
+            switch (scelta) {
+                case 1: add_new_scan(lidar); break;
+                case 2: display_last_scan(lidar); break;
+                case 3: display_all_scans(lidar); break;
+                case 4: get_distance_for_angle(lidar); break;
+                case 5: remove_oldest_scan(lidar); break;
+                case 6: clear_buffer(lidar); break;
+                case 7: add_random_scan(lidar); break;
+                case 0: std::cout << "Uscita dal programma.\n"; break;
+                default: std::cout << "Scelta non valida. Riprova.\n";
+            }
+        } while (scelta != 0);
+    } catch (const std::exception& e) {
         std::cerr << "Errore: " << e.what() << "\n";
     }
-    
+
     std::cout << "Premi Invio per continuare...\n";
     std::cin.get(); // Attende fino a quando l'utente preme Invio
-    return 0;
-
     return 0;
 }
