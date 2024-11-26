@@ -3,13 +3,12 @@
 // Costruttore di default
 LidarDriver::LidarDriver(double x) 
   : array(DIM_BUFFER),
-    angle(x >= 0.1 && x <= 1 ? x : (x < 0.1 ? 0.1 : 1)) {}
+    angle_resolution(x >= 0.1 && x <= 1 ? x : (x < 0.1 ? 0.1 : 1)) {}
 
 // Costruttore di copia
 LidarDriver::LidarDriver(const LidarDriver& vect) 
   : array(vect.array),
-    DIM_BUFFER(vect.get_capacity()),
-    angle(vect.angle) {}
+    angle_resolution(vect.angle_resolution) {}
 
 //Formatta il vettore con le specifiche che sono richieste dall'esercizio
 std::vector<double> LidarDriver::adjust_scan_size(std::vector<double> vect) const {
@@ -18,7 +17,7 @@ std::vector<double> LidarDriver::adjust_scan_size(std::vector<double> vect) cons
 }
 
 size_t LidarDriver::calculate_scan_size() const{
-    return static_cast<size_t>(std::round(180.0 / angle + 1));
+    return static_cast<size_t>(std::round(180.0 / angle_resolution + 1));
 }
 
 // Inserisce un nuovo vettore
@@ -51,7 +50,7 @@ double LidarDriver::get_distance(double angle) const {
         throw std::out_of_range("L'angolo deve essere compreso tra 0 e 180 gradi.");
     }
 
-    return array.getLatestVector()[static_cast<size_t>(angle)];
+    return array.getLatestVector()[static_cast<size_t>(angle/get_angle())];
 }
 
 //capacità buffer
@@ -66,7 +65,7 @@ int LidarDriver::get_num_elementi() const{
 }
 
 //risoluzione angolare
-double LidarDriver::get_angle() const{ return angle; }
+double LidarDriver::get_angle() const{ return angle_resolution; }
 
 //1 se vettore è vuoto
 bool LidarDriver::is_buffer_empty() const { return array.isEmpty(); }
