@@ -26,11 +26,14 @@ void add_new_scan(LidarDriver& lidar) {
     std::vector<double> v(lidar.get_num_elementi());
     std::cout << "Inserisci gli elementi del vettore (separati da spazio): ";
     for (double& val : v) {
-        std::cin >> val;
-        if (std::cin.fail()) {
-            std::cout << "Errore: input non valido.\n";
-            clearInputStream();
-            val = 0; // Imposta un valore predefinito per proseguire
+        while (true) {
+            std::cin >> val;
+            if (std::cin.fail()) {
+                std::cout << "Errore: input non valido. Riprova: ";
+                clearInputStream();
+            } else {
+                break;
+            }
         }
     }
 
@@ -119,7 +122,7 @@ void add_random_scan(LidarDriver& lidar) {
 
 int main() {
     try {
-        int angle_size;
+        double angle_size;
         do {
             std::cout << "Inserisci la risoluzione angolare (0.1 - 1): ";
             std::cin >> angle_size;
