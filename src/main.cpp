@@ -128,7 +128,7 @@ int main() {
             std::cin >> angle_size;
 
             if (std::cin.fail() || angle_size < 0.1 || angle_size > 1) {
-                std::cout << "Errore: devi inserire un numero intero positivo tra 0.1 e 1.\n";
+                std::cout << "Errore: devi inserire un numero tra 0.1 e 1.\n";
                 clearInputStream();
                 angle_size = -1;
             }
