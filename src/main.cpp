@@ -91,24 +91,32 @@ int main() {
                     lidar.print_all_scans();
                     break;
 
-                case 4:
+                case 4: {
                     if (!lidar.is_buffer_empty()) {
                         double angle;
-                        std::cout << "Inserisci l'angolo: ";
-                        std::cin >> angle;
-
-                        if (std::cin.fail() || angle < 0 || angle > 180) {
-                            std::cout << "Errore: input non valido.\n";
-                            std::cin.clear();
-                            std::cin.ignore(10000, '\n');
-                        } else {
-                            std::cout << "Distanza per angolo " << angle << ": " 
-                                      << lidar.get_distance(angle) << "\n";
-                        }
+                        bool valid_input = false;
+                
+                        do {
+                            std::cout << "Inserisci l'angolo (0-180 gradi): ";
+                            std::cin >> angle;
+                
+                            if (std::cin.fail() || angle < 0 || angle > 180) {
+                                std::cout << "Errore: devi inserire un numero compreso tra 0 e 180.\n";
+                                std::cin.clear();                 // Resetta lo stato di errore dello stream
+                                std::cin.ignore(10000, '\n');     // Svuota il buffer di input
+                            } else {
+                                valid_input = true;               // Input valido
+                            }
+                        } while (!valid_input);
+                
+                        std::cout << "Distanza per angolo " << angle << ": " 
+                                  << lidar.get_distance(angle) << "\n";
                     } else {
                         std::cout << "Il buffer è vuoto.\n";
                     }
                     break;
+                }
+
 
                 case 5:
                     if (!lidar.is_buffer_empty()) {
