@@ -9,7 +9,7 @@ LidarDriver::LidarDriver(const LidarDriver& vect) : array(vect.array) {}
 //Formatta il vettore con le specifiche che sono richieste dall'esercizio
 std::vector<double> LidarDriver::adjust_scan_size(std::vector<double> vect) const {
     const size_t minSize = 181;
-    const size_t maxSize = 1810;
+    const size_t maxSize = 1801;
 
     if (vect.size() < minSize){
         vect.resize(minSize, 0.0);
@@ -51,9 +51,7 @@ double LidarDriver::get_distance(double angle) const {
         throw std::out_of_range("L'angolo deve essere compreso tra 0 e 180 gradi.");
     }
 
-    const std::vector<double>& lastScan = array.getLatestVector();
-    int index = static_cast<int>(std::round(angle / array.getAngle()));
-    return lastScan.at(index);
+    return array.getLatestVector()[static_cast<int>(std::round(angle / array.getAngle()))];
 }
 
 
